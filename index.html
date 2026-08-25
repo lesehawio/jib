@@ -25,16 +25,6 @@
             padding: 0 16px 20px;
         }
 
-        .green {
-            color: #2fb557;
-        }
-        .bg-green {
-            background: #2fb557;
-        }
-        .border-green {
-            border-color: #2fb557;
-        }
-
         /* ===== HEADER ===== */
         .header {
             width: 100%;
@@ -43,7 +33,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(47, 181, 87, 0.1);
+            border-bottom: 1px solid rgba(47, 181, 87, 0.08);
             margin-bottom: 30px;
         }
 
@@ -54,13 +44,13 @@
         }
 
         .menu-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(47, 181, 87, 0.12);
-            color: #aaa;
-            width: 36px;
-            height: 36px;
+            background: rgba(47, 181, 87, 0.08);
+            border: 1px solid rgba(47, 181, 87, 0.15);
+            color: #2fb557;
+            width: 38px;
+            height: 38px;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -68,11 +58,12 @@
             transition: 0.3s;
         }
         .menu-btn:hover {
+            background: rgba(47, 181, 87, 0.15);
             border-color: #2fb557;
-            color: #2fb557;
+            box-shadow: 0 0 20px rgba(47, 181, 87, 0.1);
         }
 
-        /* ===== LOGO MOTION (آزاد و مستقل) ===== */
+        /* ===== LOGO MOTION ===== */
         .logo-motion {
             position: relative;
             width: 145px;
@@ -97,51 +88,23 @@
         .logo-jib {
             animation: jibLogo 10s infinite;
         }
-
         .logo-pocket {
             animation: pocketLogo 10s infinite;
         }
 
         @keyframes jibLogo {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            45% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0;
-                transform: scale(1.03);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1);
-            }
+            0% { opacity: 1; transform: scale(1); }
+            45% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0; transform: scale(1.03); }
+            100% { opacity: 0; transform: scale(1); }
         }
 
         @keyframes pocketLogo {
-            0% {
-                opacity: 0;
-                transform: scale(0.97);
-            }
-            50% {
-                opacity: 0;
-                transform: scale(0.97);
-            }
-            55% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            95% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1.03);
-            }
+            0% { opacity: 0; transform: scale(0.97); }
+            50% { opacity: 0; transform: scale(0.97); }
+            55% { opacity: 1; transform: scale(1); }
+            95% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.03); }
         }
 
         .blob {
@@ -156,86 +119,32 @@
             pointer-events: none;
         }
 
-        .blob:nth-child(3) {
-            top: 5px;
-            left: 15px;
-        }
-        .blob:nth-child(4) {
-            top: 25px;
-            left: 40px;
-        }
-        .blob:nth-child(5) {
-            top: 2px;
-            left: 70px;
-        }
-        .blob:nth-child(6) {
-            top: 22px;
-            left: 90px;
-        }
-        .blob:nth-child(7) {
-            top: 8px;
-            right: 30px;
-        }
-        .blob:nth-child(8) {
-            bottom: 3px;
-            right: 10px;
-        }
-        .blob:nth-child(9) {
-            bottom: 4px;
-            left: 5px;
-        }
+        .blob:nth-child(3) { top: 5px; left: 15px; }
+        .blob:nth-child(4) { top: 25px; left: 40px; }
+        .blob:nth-child(5) { top: 2px; left: 70px; }
+        .blob:nth-child(6) { top: 22px; left: 90px; }
+        .blob:nth-child(7) { top: 8px; right: 30px; }
+        .blob:nth-child(8) { bottom: 3px; right: 10px; }
+        .blob:nth-child(9) { bottom: 4px; left: 5px; }
 
         .blob {
             animation: blobAnimation 10s infinite;
         }
-        .blob:nth-child(4) {
-            animation-delay: .08s;
-        }
-        .blob:nth-child(5) {
-            animation-delay: .16s;
-        }
-        .blob:nth-child(6) {
-            animation-delay: .24s;
-        }
-        .blob:nth-child(7) {
-            animation-delay: .32s;
-        }
-        .blob:nth-child(8) {
-            animation-delay: .40s;
-        }
-        .blob:nth-child(9) {
-            animation-delay: .48s;
-        }
+        .blob:nth-child(4) { animation-delay: .08s; }
+        .blob:nth-child(5) { animation-delay: .16s; }
+        .blob:nth-child(6) { animation-delay: .24s; }
+        .blob:nth-child(7) { animation-delay: .32s; }
+        .blob:nth-child(8) { animation-delay: .40s; }
+        .blob:nth-child(9) { animation-delay: .48s; }
 
         @keyframes blobAnimation {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            43% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            45% {
-                opacity: .9;
-                transform: scale(.5);
-            }
-            47% {
-                opacity: 1;
-                transform: scale(2);
-            }
-            49% {
-                opacity: .8;
-                transform: scale(4);
-            }
-            51% {
-                opacity: 0;
-                transform: scale(7);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0);
-            }
+            0% { opacity: 0; transform: scale(0); }
+            43% { opacity: 0; transform: scale(0); }
+            45% { opacity: .9; transform: scale(.5); }
+            47% { opacity: 1; transform: scale(2); }
+            49% { opacity: .8; transform: scale(4); }
+            51% { opacity: 0; transform: scale(7); }
+            100% { opacity: 0; transform: scale(0); }
         }
 
         .logo-motion::after {
@@ -255,41 +164,17 @@
         }
 
         @keyframes mainBlob {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0);
-            }
-            44% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0);
-            }
-            46% {
-                opacity: .9;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            48% {
-                opacity: .9;
-                transform: translate(-50%, -50%) scale(3);
-            }
-            50% {
-                opacity: .8;
-                transform: translate(-50%, -50%) scale(8);
-            }
-            52% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(12);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0);
-            }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            44% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            46% { opacity: .9; transform: translate(-50%, -50%) scale(1); }
+            48% { opacity: .9; transform: translate(-50%, -50%) scale(3); }
+            50% { opacity: .8; transform: translate(-50%, -50%) scale(8); }
+            52% { opacity: 0; transform: translate(-50%, -50%) scale(12); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
         }
 
         @media (max-width: 600px) {
-            .logo-motion {
-                width: 120px;
-                height: 38px;
-            }
+            .logo-motion { width: 120px; height: 38px; }
         }
 
         .header-right {
@@ -299,23 +184,24 @@
         }
 
         .lang-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(47, 181, 87, 0.12);
-            color: #aaa;
-            padding: 4px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            padding: 6px 16px;
             border-radius: 8px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
+            letter-spacing: 0.5px;
         }
         .lang-btn:hover {
-            border-color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.3);
             color: #2fb557;
         }
 
-        /* ===== لوگوی بزرگ (فقط تصویر) ===== */
+        /* ===== لوگوی بزرگ ===== */
         .logo-big-wrap {
             width: 100%;
             max-width: 600px;
@@ -341,10 +227,10 @@
 
         .search-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(47, 181, 87, 0.12);
-            border-radius: 16px;
-            padding: 4px 4px 4px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 4px 4px 4px 16px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -353,11 +239,11 @@
 
         .search-box:focus-within {
             border-color: #2fb557;
-            box-shadow: 0 0 0 3px rgba(47, 181, 87, 0.08);
+            box-shadow: 0 0 0 3px rgba(47, 181, 87, 0.06);
         }
 
         .search-box .search-icon {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.15);
             font-size: 14px;
         }
 
@@ -366,15 +252,17 @@
             background: transparent;
             border: none;
             padding: 12px 0;
-            font-size: 15px;
+            font-size: 14px;
             color: #fff;
             outline: none;
             font-family: inherit;
             min-height: 46px;
+            font-weight: 400;
         }
 
         .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.12);
+            font-weight: 300;
         }
 
         .search-box .actions {
@@ -385,31 +273,31 @@
 
         .search-box .actions button {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.08);
-            color: #888;
-            width: 36px;
-            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.25);
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .search-box .actions button:hover {
-            border-color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.2);
             color: #2fb557;
-            background: rgba(47, 181, 87, 0.05);
+            background: rgba(47, 181, 87, 0.04);
         }
 
         .search-box .actions .add-btn {
             color: #2fb557;
-            font-size: 18px;
+            font-size: 17px;
         }
         .search-box .actions .add-btn:hover {
-            background: rgba(47, 181, 87, 0.12);
+            background: rgba(47, 181, 87, 0.08);
         }
 
         .search-box .actions .filter-btn {
@@ -417,16 +305,17 @@
             padding: 0 12px;
             border-radius: 20px;
             gap: 4px;
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 500;
         }
 
         .filter-badge {
             background: #2fb557;
             color: #fff;
-            font-size: 9px;
+            font-size: 8px;
             border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             display: none;
             align-items: center;
             justify-content: center;
@@ -439,13 +328,8 @@
         }
 
         @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
         /* ===== فیلتر ===== */
@@ -454,8 +338,9 @@
             top: calc(100% + 6px);
             left: 0;
             right: 0;
-            background: #141414;
-            border: 1px solid rgba(47, 181, 87, 0.08);
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 12px;
             padding: 10px 12px;
             display: none;
@@ -476,48 +361,49 @@
 
         .filter-chip {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 20px;
-            padding: 3px 10px;
+            padding: 3px 12px;
             font-size: 11px;
-            color: #888;
+            color: rgba(255, 255, 255, 0.4);
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
             display: flex;
             align-items: center;
             gap: 4px;
+            font-weight: 400;
         }
 
         .filter-chip:hover {
-            background: rgba(47, 181, 87, 0.05);
-            border-color: #2fb557;
+            background: rgba(47, 181, 87, 0.04);
+            border-color: rgba(47, 181, 87, 0.15);
             color: #fff;
         }
 
         .filter-chip.active {
-            background: rgba(47, 181, 87, 0.1);
+            background: rgba(47, 181, 87, 0.08);
             border-color: #2fb557;
             color: #2fb557;
         }
 
         .filter-chip .count {
             font-size: 9px;
-            opacity: 0.4;
+            opacity: 0.3;
         }
 
-        /* ===== پنل افزودن با لاین رنگی ===== */
+        /* ===== پنل افزودن ===== */
         .add-panel {
             width: 100%;
             max-width: 600px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
             margin-top: 10px;
             display: none;
             position: relative;
-            border-right: 4px solid #2fb557;
+            border-right: 3px solid #2fb557;
             transition: border-color 0.3s;
         }
 
@@ -534,18 +420,19 @@
         }
 
         .color-picker-wrap label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             gap: 4px;
+            font-weight: 400;
         }
 
         .color-picker-wrap input[type="color"] {
-            width: 32px;
-            height: 32px;
-            border: 1px solid rgba(47, 181, 87, 0.2);
-            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
             background: transparent;
             cursor: pointer;
             padding: 2px;
@@ -556,13 +443,13 @@
         }
         .color-picker-wrap input[type="color"]::-webkit-color-swatch {
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
         }
 
         .add-panel input {
             width: 100%;
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 8px;
             padding: 8px 12px;
             color: #fff;
@@ -570,14 +457,15 @@
             outline: none;
             font-family: inherit;
             margin-bottom: 6px;
+            font-weight: 400;
         }
 
         .add-panel input:focus {
-            border-color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.2);
         }
 
         .add-panel input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.12);
         }
 
         .add-panel .tags-wrap {
@@ -589,23 +477,25 @@
 
         .add-panel .tags-wrap .tag-chip {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 20px;
-            padding: 2px 10px;
+            padding: 2px 12px;
             font-size: 11px;
-            color: #888;
+            color: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
+            font-weight: 400;
         }
 
         .add-panel .tags-wrap .tag-chip:hover {
-            background: rgba(47, 181, 87, 0.05);
-            border-color: #2fb557;
+            background: rgba(47, 181, 87, 0.04);
+            border-color: rgba(47, 181, 87, 0.15);
+            color: #fff;
         }
 
         .add-panel .tags-wrap .tag-chip.active {
-            background: rgba(47, 181, 87, 0.1);
+            background: rgba(47, 181, 87, 0.08);
             border-color: #2fb557;
             color: #2fb557;
         }
@@ -620,7 +510,7 @@
             padding: 6px 18px;
             border-radius: 20px;
             border: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             font-family: inherit;
@@ -637,12 +527,12 @@
         }
 
         .add-actions .cancel {
-            background: rgba(255, 255, 255, 0.05);
-            color: #888;
-            border: 1px solid rgba(47, 181, 87, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .add-actions .cancel:hover {
-            border-color: #2fb557;
+            border-color: rgba(255, 255, 255, 0.1);
             color: #fff;
         }
 
@@ -659,31 +549,34 @@
         }
 
         .results .count {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.25);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.15);
             padding: 0 4px 8px;
             display: block;
+            font-weight: 300;
+            letter-spacing: 0.3px;
         }
 
         .cards {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.06);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
             padding: 12px 14px;
             transition: 0.3s;
             position: relative;
-            border-right: 4px solid #2fb557;
+            border-right: 3px solid #2fb557;
         }
 
         .card:hover {
-            border-color: rgba(47, 181, 87, 0.15);
-            transform: translateY(-2px);
+            border-color: rgba(47, 181, 87, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-1px);
         }
 
         .card .top {
@@ -694,68 +587,77 @@
 
         .card .eng {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             direction: ltr;
             text-align: left;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .card .pron {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.25);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.15);
             direction: ltr;
             text-align: left;
+            font-weight: 300;
         }
 
         .card .fa {
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             margin-top: 2px;
+            font-weight: 400;
         }
 
         .card .ar {
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.3);
             direction: rtl;
         }
 
         .card .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
             margin-top: 6px;
         }
 
         .card .tags span {
-            font-size: 10px;
-            background: rgba(47, 181, 87, 0.04);
-            border: 1px solid rgba(47, 181, 87, 0.04);
+            font-size: 9px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 20px;
-            padding: 1px 8px;
-            color: #888;
+            padding: 1px 10px;
+            color: rgba(255, 255, 255, 0.25);
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 3px;
+            font-weight: 400;
         }
 
         .card .tags span:hover {
-            background: rgba(47, 181, 87, 0.08);
-            border-color: #2fb557;
+            background: rgba(47, 181, 87, 0.04);
+            border-color: rgba(47, 181, 87, 0.1);
             color: #fff;
+        }
+
+        .card .tags span i {
+            font-size: 8px;
+            opacity: 0.5;
         }
 
         .card .actions {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             align-items: center;
             flex-shrink: 0;
         }
 
         .card .actions button {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.06);
-            color: #666;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.15);
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -768,38 +670,36 @@
         }
 
         .card .actions button:hover {
-            border-color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.15);
             color: #2fb557;
         }
 
         .card .actions .saved {
             color: #2fb557;
-            border-color: rgba(47, 181, 87, 0.2);
+            border-color: rgba(47, 181, 87, 0.15);
         }
 
         .card .actions .delete-btn:hover {
-            border-color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.2);
             color: #ef4444;
         }
 
-        /* ===== دکمه ضبط سه‌حالته ===== */
+        /* ===== دکمه ضبط ===== */
         .card .actions .record-btn {
-            color: #ef4444;
-            border-color: rgba(239, 68, 68, 0.2);
-            transition: 0.2s;
+            color: rgba(239, 68, 68, 0.3);
+            border-color: rgba(239, 68, 68, 0.05);
         }
         .card .actions .record-btn.recording {
             animation: pulse 1s infinite;
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
             color: #ef4444;
         }
         .card .actions .record-btn.played {
             color: #2fb557;
-            border-color: rgba(47, 181, 87, 0.3);
+            border-color: rgba(47, 181, 87, 0.15);
         }
 
-        /* محو شدن محتویات کارت هنگام ضبط */
         .card.recording-active .top>div:not(.actions) {
             opacity: 0.2;
             transition: opacity 0.3s;
@@ -815,18 +715,19 @@
             opacity: 0.3;
         }
         .empty i {
-            font-size: 30px;
+            font-size: 28px;
             color: #2fb557;
             display: block;
             margin-bottom: 8px;
         }
         .empty .title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
         }
         .empty .desc {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.2);
             margin-top: 4px;
         }
 
@@ -843,22 +744,23 @@
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(47, 181, 87, 0.06);
-            color: #888;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.2);
             padding: 4px 14px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
             display: flex;
             align-items: center;
             gap: 6px;
+            font-weight: 400;
         }
 
         .back-btn:hover {
-            border-color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.15);
             color: #2fb557;
         }
 
@@ -867,14 +769,15 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 300px;
-            max-width: 85vw;
+            width: 280px;
+            max-width: 80vw;
             height: 100%;
-            background: #111;
-            border-left: 1px solid rgba(47, 181, 87, 0.08);
+            background: rgba(16, 16, 16, 0.98);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.03);
             z-index: 1000;
             padding: 20px;
-            transition: right 0.3s ease;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
         }
 
@@ -888,7 +791,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
             z-index: 999;
             display: none;
         }
@@ -902,29 +806,31 @@
             justify-content: space-between;
             align-items: center;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(47, 181, 87, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             margin-bottom: 14px;
         }
 
         .sidebar .brand {
-            font-size: 20px;
-            font-weight: 900;
+            font-size: 18px;
+            font-weight: 800;
             color: #2fb557;
             display: flex;
             align-items: center;
             gap: 8px;
+            letter-spacing: -0.5px;
         }
 
         .sidebar .brand img {
-            height: 28px;
+            height: 24px;
         }
 
         .sidebar-close {
             background: transparent;
             border: none;
-            color: #888;
-            font-size: 20px;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 18px;
             cursor: pointer;
+            transition: 0.3s;
         }
         .sidebar-close:hover {
             color: #fff;
@@ -933,7 +839,7 @@
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .sidebar-nav .nav-item {
@@ -941,21 +847,22 @@
             align-items: center;
             gap: 12px;
             padding: 10px 12px;
-            border-radius: 10px;
-            color: #888;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: 0.3s;
             border: none;
             background: transparent;
             width: 100%;
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
             text-align: right;
+            font-weight: 400;
         }
 
         .sidebar-nav .nav-item:hover {
-            background: rgba(47, 181, 87, 0.05);
-            color: #fff;
+            background: rgba(47, 181, 87, 0.04);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .sidebar-nav .nav-item.active {
@@ -965,18 +872,19 @@
 
         .sidebar-nav .nav-item i {
             width: 20px;
+            font-size: 14px;
         }
 
         .sidebar-nav .divider {
             border: none;
-            border-top: 1px solid rgba(47, 181, 87, 0.06);
-            margin: 8px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin: 6px 0;
         }
 
         .sidebar-nav .nav-item .badge {
-            background: #2fb557;
-            color: #fff;
-            font-size: 9px;
+            background: rgba(47, 181, 87, 0.15);
+            color: #2fb557;
+            font-size: 8px;
             padding: 1px 8px;
             border-radius: 20px;
             margin-right: auto;
@@ -985,9 +893,11 @@
         /* ===== اطلاعات پایین ===== */
         .info {
             margin-top: 12px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.12);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.06);
             text-align: center;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
         /* ===== میکروفون جستجو ===== */
@@ -997,8 +907,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(24px);
             z-index: 200;
             display: none;
             align-items: center;
@@ -1012,22 +922,24 @@
         }
 
         .mic-overlay .icon {
-            font-size: 50px;
+            font-size: 48px;
             color: #2fb557;
             animation: pulse 1s infinite;
         }
 
         .mic-overlay .text {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
         }
 
         .mic-overlay .result {
             font-size: 18px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             padding: 8px 24px;
             border-radius: 30px;
-            border: 1px solid rgba(47, 181, 87, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .mic-close {
@@ -1036,24 +948,27 @@
             right: 20px;
             background: transparent;
             border: none;
-            color: #888;
-            font-size: 24px;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 22px;
             cursor: pointer;
+            transition: 0.3s;
+        }
+        .mic-close:hover {
+            color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ===== responsive ===== */
         @media (max-width: 600px) {
             .search-box input {
                 font-size: 13px;
                 min-height: 38px;
             }
             .search-box .actions button {
-                width: 32px;
-                height: 32px;
-                font-size: 12px;
+                width: 30px;
+                height: 30px;
+                font-size: 11px;
             }
             .search-box .actions .filter-btn {
-                padding: 0 8px;
+                padding: 0 10px;
                 font-size: 10px;
             }
             .logo-big-wrap img {
@@ -1063,17 +978,18 @@
                 padding: 8px 0;
                 margin-bottom: 20px;
             }
+            .sidebar {
+                width: 260px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== HEADER با لوگوی متحرک ===== -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="header-left">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
-
-            <!-- LOGO MOTION — کاملاً مستقل و آزاد -->
             <div class="logo-motion">
                 <img class="logo logo-jib" src="https://uploadkon.ir/uploads/e52525_26typogrophyjib.png" alt="جیب" />
                 <img class="logo logo-pocket" src="https://uploadkon.ir/uploads/1bd625_26typogrophypocket.png" alt="Pocket" />
@@ -1087,7 +1003,7 @@
             </div>
         </div>
         <div class="header-right">
-            <button class="lang-btn" id="langBtn">🌐 FA</button>
+            <button class="lang-btn" id="langBtn">FA</button>
         </div>
     </header>
 
@@ -1102,7 +1018,6 @@
     <!-- ===== محتوای اصلی ===== -->
     <div style="width:100%; max-width:600px;">
 
-        <!-- لوگوی بزرگ (فقط تصویر) -->
         <div class="logo-big-wrap">
             <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
         </div>
@@ -1123,7 +1038,6 @@
                 </div>
             </div>
 
-            <!-- فیلتر -->
             <div class="filter-dropdown" id="filterDropdown">
                 <div class="filter-grid" id="filterGrid"></div>
             </div>
@@ -1136,15 +1050,15 @@
             <input id="addAr" placeholder="العربية (مثلاً أنا ذاهب إلى المتجر)" />
 
             <div class="color-picker-wrap">
-                <label for="cardColor"><i class="fas fa-palette"></i> رنگ لاین:</label>
+                <label for="cardColor"><i class="fas fa-palette"></i> رنگ لاین</label>
                 <input type="color" id="cardColor" value="#2fb557" />
             </div>
 
             <div class="tags-wrap" id="addTagsWrap">
-                <span style="font-size:10px; color:rgba(255,255,255,0.2);">تگ‌ها:</span>
+                <span style="font-size:10px; color:rgba(255,255,255,0.12);">تگ‌ها</span>
             </div>
             <div class="add-actions">
-                <button class="submit" id="addSubmit">➕ افزودن</button>
+                <button class="submit" id="addSubmit"><i class="fas fa-plus"></i> افزودن</button>
                 <button class="cancel" id="addCancel">لغو</button>
             </div>
         </div>
@@ -1160,7 +1074,6 @@
             <div class="cards" id="cardsContainer"></div>
         </div>
 
-        <!-- اطلاعات -->
         <div class="info" id="info">0 جمله • 0 تگ</div>
     </div>
 
@@ -1196,27 +1109,38 @@
         let activeFilter = null;
         let searchQuery = '';
 
+        // ============================================================
+        // لیست تگ‌ها (بدون ایموجی، فقط آیکون Font Awesome)
+        // ============================================================
         const TAGS = [
-            { id: 'greeting', icon: '👋', fa: 'احوالپرسی', en: 'Greeting', ar: 'تحية' },
-            { id: 'daily', icon: '🌅', fa: 'روزمره', en: 'Daily', ar: 'يومي' },
-            { id: 'food', icon: '🍔', fa: 'غذا', en: 'Food', ar: 'طعام' },
-            { id: 'drink', icon: '☕', fa: 'نوشیدنی', en: 'Drink', ar: 'مشروب' },
-            { id: 'work', icon: '💼', fa: 'کار', en: 'Work', ar: 'عمل' },
-            { id: 'study', icon: '📚', fa: 'مطالعه', en: 'Study', ar: 'دراسة' },
-            { id: 'health', icon: '🏥', fa: 'سلامت', en: 'Health', ar: 'صحة' },
-            { id: 'emotion', icon: '😊', fa: 'احساسات', en: 'Emotion', ar: 'عاطفة' },
-            { id: 'social', icon: '👥', fa: 'اجتماعی', en: 'Social', ar: 'اجتماعي' },
-            { id: 'shopping', icon: '🛒', fa: 'خرید', en: 'Shopping', ar: 'تسوق' },
-            { id: 'travel', icon: '✈️', fa: 'سفر', en: 'Travel', ar: 'سفر' },
-            { id: 'home', icon: '🏠', fa: 'خانه', en: 'Home', ar: 'منزل' },
-            { id: 'tech', icon: '💻', fa: 'فناوری', en: 'Tech', ar: 'تكنولوجيا' },
-            { id: 'education', icon: '🎓', fa: 'آموزش', en: 'Education', ar: 'تعليم' },
-            { id: 'business', icon: '📊', fa: 'کسب‌وکار', en: 'Business', ar: 'أعمال' },
-            { id: 'weather', icon: '🌤️', fa: 'آب‌وهوا', en: 'Weather', ar: 'طقس' },
-            { id: 'time', icon: '⏰', fa: 'زمان', en: 'Time', ar: 'وقت' },
-            { id: 'family', icon: '👨‍👩‍👧', fa: 'خانواده', en: 'Family', ar: 'عائلة' },
-            { id: 'friend', icon: '🤝', fa: 'دوست', en: 'Friend', ar: 'صديق' },
-            { id: 'emergency', icon: '🚨', fa: 'اورژانس', en: 'Emergency', ar: 'طوارئ' }
+            { id: 'greeting', icon: 'fa-hand-peace', fa: 'احوالپرسی', en: 'Greeting', ar: 'تحية' },
+            { id: 'conversation', icon: 'fa-comment-dots', fa: 'مکالمه', en: 'Conversation', ar: 'محادثة' },
+            { id: 'questions', icon: 'fa-question-circle', fa: 'سؤال و درخواست', en: 'Questions & Requests', ar: 'أسئلة وطلبات' },
+            { id: 'politeness', icon: 'fa-handshake', fa: 'مودبانه', en: 'Politeness', ar: 'مهذب' },
+            { id: 'opinions', icon: 'fa-comment', fa: 'نظر و واکنش', en: 'Opinions & Reactions', ar: 'آراء وردود' },
+            { id: 'daily', icon: 'fa-sun', fa: 'روزمره', en: 'Daily Life', ar: 'يومي' },
+            { id: 'social', icon: 'fa-users', fa: 'اجتماعی', en: 'Social', ar: 'اجتماعي' },
+            { id: 'family', icon: 'fa-users', fa: 'خانواده', en: 'Family', ar: 'عائلة' },
+            { id: 'friends', icon: 'fa-user-friends', fa: 'دوست', en: 'Friends', ar: 'أصدقاء' },
+            { id: 'plans', icon: 'fa-calendar-check', fa: 'قرار و برنامه', en: 'Plans', ar: 'مواعيد وخطط' },
+            { id: 'food', icon: 'fa-utensils', fa: 'غذا', en: 'Food', ar: 'طعام' },
+            { id: 'drink', icon: 'fa-coffee', fa: 'نوشیدنی', en: 'Drink', ar: 'مشروب' },
+            { id: 'shopping', icon: 'fa-shopping-bag', fa: 'خرید', en: 'Shopping', ar: 'تسوق' },
+            { id: 'money', icon: 'fa-coins', fa: 'پول', en: 'Money', ar: 'مال' },
+            { id: 'travel', icon: 'fa-plane', fa: 'سفر', en: 'Travel', ar: 'سفر' },
+            { id: 'transport', icon: 'fa-car', fa: 'رفت‌وآمد', en: 'Transportation', ar: 'مواصلات' },
+            { id: 'weather', icon: 'fa-cloud-sun', fa: 'آب‌وهوا', en: 'Weather', ar: 'طقس' },
+            { id: 'time', icon: 'fa-clock', fa: 'زمان', en: 'Time', ar: 'وقت' },
+            { id: 'work', icon: 'fa-briefcase', fa: 'کار', en: 'Work', ar: 'عمل' },
+            { id: 'study', icon: 'fa-book-open', fa: 'مطالعه', en: 'Study', ar: 'دراسة' },
+            { id: 'education', icon: 'fa-graduation-cap', fa: 'آموزش', en: 'Education', ar: 'تعليم' },
+            { id: 'tech', icon: 'fa-laptop-code', fa: 'فناوری', en: 'Tech', ar: 'تكنولوجيا' },
+            { id: 'business', icon: 'fa-chart-line', fa: 'کسب‌وکار', en: 'Business', ar: 'أعمال' },
+            { id: 'health', icon: 'fa-heartbeat', fa: 'سلامت', en: 'Health', ar: 'صحة' },
+            { id: 'emergency', icon: 'fa-exclamation-triangle', fa: 'اورژانس', en: 'Emergency', ar: 'طوارئ' },
+            { id: 'problems', icon: 'fa-frown', fa: 'مشکل و شکایت', en: 'Problems', ar: 'مشاكل' },
+            { id: 'emotion', icon: 'fa-smile', fa: 'احساسات', en: 'Emotion', ar: 'عاطفة' },
+            { id: 'home', icon: 'fa-home', fa: 'خانه', en: 'Home', ar: 'منزل' }
         ];
 
         // ============================================================
@@ -1321,14 +1245,14 @@
         }
 
         function getTagLabel(id) {
-            const t = TAGS.find(x => x.id === id);
-            if (!t) return id;
-            return t[currentLang] || t.fa;
+            const tag = TAGS.find(x => x.id === id);
+            if (!tag) return id;
+            return tag[currentLang] || tag.fa;
         }
 
         function getTagIcon(id) {
-            const t = TAGS.find(x => x.id === id);
-            return t ? t.icon : '🏷️';
+            const tag = TAGS.find(x => x.id === id);
+            return tag ? tag.icon : 'fa-tag';
         }
 
         function getAllTags() {
@@ -1410,7 +1334,7 @@
         const micResult = document.getElementById('micResult');
 
         // ============================================================
-        // تغییر زبان کل سایت
+        // تغییر زبان
         // ============================================================
         const LANGUAGES = [
             { lang: 'fa', label: 'FA' },
@@ -1422,7 +1346,7 @@
         function updateLanguage(index) {
             const lang = LANGUAGES[index];
             currentLang = lang.lang;
-            langBtn.textContent = `🌐 ${lang.label}`;
+            langBtn.textContent = lang.label;
 
             document.title = t('title');
             document.getElementById('brandText').textContent = t('brand');
@@ -1438,12 +1362,12 @@
             });
 
             document.querySelector('.back-btn').innerHTML = `<i class="fas fa-arrow-right"></i> ${t('home')}`;
-            document.querySelector('.add-actions .submit').textContent = `➕ ${t('add_with')}`;
+            document.querySelector('.add-actions .submit').innerHTML = `<i class="fas fa-plus"></i> ${t('add_with')}`;
             document.querySelector('.add-actions .cancel').textContent = t('home');
             addEng.placeholder = 'English (e.g. I\'m going to the store)';
             addFa.placeholder = t('add_new');
             addAr.placeholder = 'العربية (مثلاً أنا ذاهب إلى المتجر)';
-            document.querySelector('.color-picker-wrap label').innerHTML = `<i class="fas fa-palette"></i> ${t('tags')}:`;
+            document.querySelector('.color-picker-wrap label').innerHTML = `<i class="fas fa-palette"></i> ${t('tags')}`;
 
             updateInfo();
             renderFilterGrid();
@@ -1462,14 +1386,14 @@
         function renderFilterGrid() {
             const allTags = getAllTags();
             filterGrid.innerHTML =
-                `<button class="filter-chip ${!activeFilter ? 'active' : ''}" data-tag=""><span>🏷️</span> ${t('all')} <span class="count">(${expressions.length})</span></button>`;
+                `<button class="filter-chip ${!activeFilter ? 'active' : ''}" data-tag=""><i class="fas fa-tag"></i> ${t('all')} <span class="count">(${expressions.length})</span></button>`;
 
             allTags.forEach(tag => {
                 const count = getTagCount(tag);
                 const chip = document.createElement('button');
                 chip.className = `filter-chip ${activeFilter === tag ? 'active' : ''}`;
                 chip.dataset.tag = tag;
-                chip.innerHTML = `<span>${getTagIcon(tag)}</span> ${getTagLabel(tag)} <span class="count">(${count})</span>`;
+                chip.innerHTML = `<i class="fas ${getTagIcon(tag)}"></i> ${getTagLabel(tag)} <span class="count">(${count})</span>`;
                 chip.onclick = () => {
                     activeFilter = activeFilter === tag ? null : tag;
                     renderFilterGrid();
@@ -1548,7 +1472,7 @@
                                     <div class="pron">${expr.pron}</div>
                                     <div class="fa">${expr.fa}</div>
                                     ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
-                                    <div class="tags">${expr.tags.map(t => `<span data-tag="${t}"><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
+                                    <div class="tags">${expr.tags.map(t => `<span data-tag="${t}"><i class="fas ${getTagIcon(t)}"></i> ${getTagLabel(t)}</span>`).join('')}</div>
                                 </div>
                                 <div class="actions">
                                     <button class="record-btn" data-eng="${expr.eng}" title="${t('mic_not_supported')}"><i class="fas fa-microphone"></i></button>
@@ -1759,12 +1683,12 @@
 
         function renderAddTags() {
             const allTags = getAllTags();
-            addTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.2);">${t('tags')}:</span>`;
+            addTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.12);">${t('tags')}</span>`;
             allTags.forEach(tag => {
                 const chip = document.createElement('span');
                 chip.className = 'tag-chip';
                 chip.dataset.tag = tag;
-                chip.textContent = `${getTagIcon(tag)} ${getTagLabel(tag)}`;
+                chip.innerHTML = `<i class="fas ${getTagIcon(tag)}"></i> ${getTagLabel(tag)}`;
                 chip.onclick = () => chip.classList.toggle('active');
                 addTagsWrap.appendChild(chip);
             });
@@ -1894,7 +1818,7 @@
                                                 <div class="pron">${expr.pron}</div>
                                                 <div class="fa">${expr.fa}</div>
                                                 ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
-                                                <div class="tags">${expr.tags.map(t => `<span><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
+                                                <div class="tags">${expr.tags.map(t => `<span><i class="fas ${getTagIcon(t)}"></i> ${getTagLabel(t)}</span>`).join('')}</div>
                                             </div>
                                             <div class="actions">
                                                 <button class="record-btn" data-eng="${expr.eng}" title="${t('mic_not_supported')}"><i class="fas fa-microphone"></i></button>
@@ -1993,24 +1917,24 @@
                     backWrap.classList.add('visible');
                     cardsContainer.innerHTML = `
                             <div style="padding:10px 0;">
-                                <div style="font-size:16px; font-weight:700; color:#2fb557; margin-bottom:12px;">📊 ${t('statistics')}</div>
+                                <div style="font-size:16px; font-weight:700; color:#2fb557; margin-bottom:12px;"><i class="fas fa-chart-simple"></i> ${t('statistics')}</div>
                                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
-                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${expressions.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('sentences')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.2);">${t('sentences')}</div>
                                     </div>
-                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${allTags.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('tags')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.2);">${t('tags')}</div>
                                     </div>
-                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${bookmarks.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('bookmarks')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.2);">${t('bookmarks')}</div>
                                     </div>
                                 </div>
                             </div>
                         `;
-                    resultCount.textContent = '📊 ' + t('statistics');
+                    resultCount.textContent = '<i class="fas fa-chart-simple"></i> ' + t('statistics');
                     closeSidebarPanel();
                     return;
                 }
@@ -2148,11 +2072,10 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — با لوگوی متحرک کاملاً مستقل');
+        console.log('✅ جیب — طراحی هنری با آیکون‌های Font Awesome');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('🔍 جستجوی پیشرفته در متن و تگ‌ها');
-        console.log('🎨 لوگوی متحرک آزاد و مستقل از هر المان');
+        console.log('🎨 دکمه منوی سبز، بدون ایموجی، حرفه‌ای');
     </script>
 </body>
 </html>
