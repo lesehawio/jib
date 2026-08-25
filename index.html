@@ -72,24 +72,6 @@
             color: #2fb557;
         }
 
-        .logo-mini {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .logo-mini img {
-            height: 28px;
-            width: auto;
-        }
-
-        .logo-mini .logo-text {
-            font-size: 20px;
-            font-weight: 900;
-            color: #2fb557;
-            letter-spacing: -1px;
-        }
-
         .header-right {
             display: flex;
             align-items: center;
@@ -113,7 +95,7 @@
             color: #2fb557;
         }
 
-        /* ===== لوگوی بزرگ ===== */
+        /* ===== لوگوی بزرگ (فقط تصویر) ===== */
         .logo-big-wrap {
             width: 100%;
             max-width: 600px;
@@ -315,9 +297,7 @@
             margin-top: 10px;
             display: none;
             position: relative;
-            /* لاین رنگی سمت راست باکس */
             border-right: 4px solid #2fb557;
-            /* رنگ پیش‌فرض */
             transition: border-color 0.3s;
         }
 
@@ -325,7 +305,6 @@
             display: block;
         }
 
-        /* انتخابگر رنگ — استایل جدید */
         .color-picker-wrap {
             display: flex;
             align-items: center;
@@ -472,7 +451,6 @@
             gap: 8px;
         }
 
-        /* کارت با لاین رنگی سمت راست */
         .card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(47, 181, 87, 0.06);
@@ -481,7 +459,6 @@
             transition: 0.3s;
             position: relative;
             border-right: 4px solid #2fb557;
-            /* لاین رنگی پیش‌فرض */
         }
 
         .card:hover {
@@ -585,19 +562,30 @@
             color: #ef4444;
         }
 
-        /* دکمه ضبط (ریکورد) */
+        /* ===== دکمه ضبط سه‌حالته ===== */
         .card .actions .record-btn {
             color: #ef4444;
             border-color: rgba(239, 68, 68, 0.2);
-        }
-        .card .actions .record-btn:hover {
-            border-color: #ef4444;
-            color: #ef4444;
+            transition: 0.2s;
         }
         .card .actions .record-btn.recording {
             animation: pulse 1s infinite;
             border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        .card .actions .record-btn.played {
+            color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.3);
+        }
+
+        /* محو شدن محتویات کارت هنگام ضبط */
+        .card.recording-active .top > div:not(.actions) {
+            opacity: 0.2;
+            transition: opacity 0.3s;
+        }
+        .card.recording-active .tags {
+            opacity: 0.2;
         }
 
         /* ===== خالی ===== */
@@ -782,7 +770,7 @@
             text-align: center;
         }
 
-        /* ===== میکروفون ===== */
+        /* ===== میکروفون جستجو ===== */
         .mic-overlay {
             position: fixed;
             top: 0;
@@ -851,12 +839,6 @@
             .logo-big-wrap img {
                 height: clamp(60px, 15vw, 100px);
             }
-            .logo-mini img {
-                height: 22px;
-            }
-            .logo-mini .logo-text {
-                font-size: 16px;
-            }
             .header {
                 padding: 8px 0;
                 margin-bottom: 20px;
@@ -866,21 +848,17 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER (بدون لوگو) ===== -->
     <header class="header">
         <div class="header-left">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
-            <div class="logo-mini">
-                <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
-                <span class="logo-text">جیب</span>
-            </div>
         </div>
         <div class="header-right">
             <button class="lang-btn" id="langBtn">🌐 FA</button>
         </div>
     </header>
 
-    <!-- ===== میکروفون ===== -->
+    <!-- ===== میکروفون جستجو ===== -->
     <div class="mic-overlay" id="micOverlay">
         <button class="mic-close" id="micClose"><i class="fas fa-times"></i></button>
         <div class="icon"><i class="fas fa-microphone"></i></div>
@@ -891,7 +869,7 @@
     <!-- ===== محتوای اصلی ===== -->
     <div style="width:100%; max-width:600px;">
 
-        <!-- لوگوی بزرگ -->
+        <!-- لوگوی بزرگ (فقط تصویر) -->
         <div class="logo-big-wrap">
             <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
         </div>
@@ -918,13 +896,12 @@
             </div>
         </div>
 
-        <!-- ===== پنل افزودن با انتخابگر رنگ ===== -->
+        <!-- ===== پنل افزودن ===== -->
         <div class="add-panel" id="addPanel">
             <input id="addEng" placeholder="English (e.g. I'm going to the store)" />
             <input id="addFa" placeholder="فارسی (مثلاً دارم می‌رم فروشگاه)" />
             <input id="addAr" placeholder="العربية (مثلاً أنا ذاهب إلى المتجر)" />
 
-            <!-- انتخابگر رنگ برای لاین کناری -->
             <div class="color-picker-wrap">
                 <label for="cardColor"><i class="fas fa-palette"></i> رنگ لاین:</label>
                 <input type="color" id="cardColor" value="#2fb557" />
@@ -960,19 +937,19 @@
         <div class="side-header">
             <div class="brand">
                 <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
-                جیب
+                <span id="brandText">جیب</span>
             </div>
             <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
         </div>
         <nav class="sidebar-nav">
-            <button class="nav-item active" data-page="home"><i class="fas fa-home"></i> صفحه اصلی</button>
-            <button class="nav-item" data-page="explore"><i class="fas fa-compass"></i> اکسپلور</button>
-            <button class="nav-item" data-page="notes"><i class="fas fa-sticky-note"></i> یادداشت <span class="badge">nts</span></button>
-            <button class="nav-item" data-page="chatgpt"><i class="fas fa-robot"></i> ChatGPT</button>
-            <button class="nav-item" data-page="deepseek"><i class="fas fa-brain"></i> DeepSeek</button>
+            <button class="nav-item active" data-page="home"><i class="fas fa-home"></i> <span class="nav-label">صفحه اصلی</span></button>
+            <button class="nav-item" data-page="explore"><i class="fas fa-compass"></i> <span class="nav-label">اکسپلور</span></button>
+            <button class="nav-item" data-page="notes"><i class="fas fa-sticky-note"></i> <span class="nav-label">یادداشت</span> <span class="badge">nts</span></button>
+            <button class="nav-item" data-page="chatgpt"><i class="fas fa-robot"></i> <span class="nav-label">ChatGPT</span></button>
+            <button class="nav-item" data-page="deepseek"><i class="fas fa-brain"></i> <span class="nav-label">DeepSeek</span></button>
             <hr class="divider" />
-            <button class="nav-item" data-page="bookmarks"><i class="fas fa-bookmark"></i> نشان‌ها</button>
-            <button class="nav-item" data-page="stats"><i class="fas fa-chart-simple"></i> آمار</button>
+            <button class="nav-item" data-page="bookmarks"><i class="fas fa-bookmark"></i> <span class="nav-label">نشان‌ها</span></button>
+            <button class="nav-item" data-page="stats"><i class="fas fa-chart-simple"></i> <span class="nav-label">آمار</span></button>
         </nav>
     </aside>
 
@@ -986,7 +963,6 @@
         let activeFilter = null;
         let searchQuery = '';
 
-        // تگ‌های استاندارد
         const TAGS = [
             { id: 'greeting', icon: '👋', fa: 'احوالپرسی', en: 'Greeting', ar: 'تحية' },
             { id: 'daily', icon: '🌅', fa: 'روزمره', en: 'Daily', ar: 'يومي' },
@@ -1009,6 +985,107 @@
             { id: 'friend', icon: '🤝', fa: 'دوست', en: 'Friend', ar: 'صديق' },
             { id: 'emergency', icon: '🚨', fa: 'اورژانس', en: 'Emergency', ar: 'طوارئ' }
         ];
+
+        // ============================================================
+        // متن‌های چندزبانه برای کل سایت
+        // ============================================================
+        const TRANSLATIONS = {
+            'fa': {
+                'brand': 'جیب',
+                'search_placeholder': 'چی می‌خوای بگی؟ بنویس...',
+                'title': 'جیب ✦ موتور جستجوی زندگی روزمره',
+                'home': 'صفحه اصلی',
+                'explore': 'اکسپلور',
+                'notes': 'یادداشت',
+                'bookmarks': 'نشان‌ها',
+                'stats': 'آمار',
+                'all': 'همه',
+                'result': 'نتیجه',
+                'results': 'نتیجه',
+                'nothing_found': 'چیزی پیدا نشد',
+                'add_new': 'جمله جدید اضافه کن ✨',
+                'no_sentences': 'هنوز جمله‌ای اضافه نشده',
+                'add_with': 'با + اضافه کن ✨',
+                'no_bookmarks': 'نشانی وجود ندارد',
+                'statistics': 'آمار',
+                'sentences': 'جمله',
+                'tags': 'تگ',
+                'delete_confirm': 'حذف "{0}"؟',
+                'eng_required': 'انگلیسی و فارسی الزامی است',
+                'tag_required': 'حداقل یک تگ انتخاب کنید',
+                'mic_not_supported': 'ضبط صدا پشتیبانی نمی‌شود',
+                'mic_denied': 'دسترسی به میکروفون داده نشد',
+                'listening': 'در حال گوش دادن...',
+                'speak_to_search': 'برای جستجو صحبت کنید...',
+                'error': 'خطا'
+            },
+            'en': {
+                'brand': 'Pocket',
+                'search_placeholder': 'What do you want to say? Type...',
+                'title': 'Pocket ✦ Daily Life Search Engine',
+                'home': 'Home',
+                'explore': 'Explore',
+                'notes': 'Notes',
+                'bookmarks': 'Bookmarks',
+                'stats': 'Statistics',
+                'all': 'All',
+                'result': 'result',
+                'results': 'results',
+                'nothing_found': 'Nothing found',
+                'add_new': 'Add a new sentence ✨',
+                'no_sentences': 'No sentences yet',
+                'add_with': 'Add with + ✨',
+                'no_bookmarks': 'No bookmarks',
+                'statistics': 'Statistics',
+                'sentences': 'Sentences',
+                'tags': 'Tags',
+                'delete_confirm': 'Delete "{0}"?',
+                'eng_required': 'English and Persian required',
+                'tag_required': 'Select at least one tag',
+                'mic_not_supported': 'Audio recording not supported',
+                'mic_denied': 'Microphone access denied',
+                'listening': 'Listening...',
+                'speak_to_search': 'Speak to search...',
+                'error': 'Error'
+            },
+            'ar': {
+                'brand': 'جيب',
+                'search_placeholder': 'ماذا تريد أن تقول؟ اكتب...',
+                'title': 'جيب ✦ محرك بحث الحياة اليومية',
+                'home': 'الصفحة الرئيسية',
+                'explore': 'استكشف',
+                'notes': 'ملاحظات',
+                'bookmarks': 'العلامات المرجعية',
+                'stats': 'إحصائيات',
+                'all': 'الكل',
+                'result': 'نتيجة',
+                'results': 'نتيجة',
+                'nothing_found': 'لم يتم العثور على شيء',
+                'add_new': 'أضف جملة جديدة ✨',
+                'no_sentences': 'لا توجد جمل بعد',
+                'add_with': 'أضف باستخدام + ✨',
+                'no_bookmarks': 'لا توجد علامات مرجعية',
+                'statistics': 'إحصائيات',
+                'sentences': 'جمل',
+                'tags': 'علامات',
+                'delete_confirm': 'حذف "{0}"؟',
+                'eng_required': 'الإنجليزية والفارسية مطلوبة',
+                'tag_required': 'اختر علامة واحدة على الأقل',
+                'mic_not_supported': 'تسجيل الصوت غير مدعوم',
+                'mic_denied': 'تم رفض الوصول إلى الميكروفون',
+                'listening': 'جاري الاستماع...',
+                'speak_to_search': 'تحدث للبحث...',
+                'error': 'خطأ'
+            }
+        };
+
+        function t(key, ...args) {
+            let text = TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS['fa'][key] || key;
+            args.forEach((arg, i) => {
+                text = text.replace(`{${i}}`, arg);
+            });
+            return text;
+        }
 
         function getTagLabel(id) {
             const t = TAGS.find(x => x.id === id);
@@ -1062,12 +1139,6 @@
             window.speechSynthesis.speak(u);
         }
 
-        function getLocalText(fa, en, ar) {
-            if (currentLang === 'fa') return fa;
-            if (currentLang === 'en') return en;
-            return ar || fa;
-        }
-
         // ============================================================
         // DOM
         // ============================================================
@@ -1092,7 +1163,7 @@
         const addTagsWrap = document.getElementById('addTagsWrap');
         const addSubmit = document.getElementById('addSubmit');
         const addCancel = document.getElementById('addCancel');
-        const cardColor = document.getElementById('cardColor'); // انتخابگر رنگ
+        const cardColor = document.getElementById('cardColor');
 
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -1106,12 +1177,12 @@
         const micResult = document.getElementById('micResult');
 
         // ============================================================
-        // تغییر زبان (دستی)
+        // تغییر زبان کل سایت
         // ============================================================
         const LANGUAGES = [
-            { lang: 'fa', label: 'FA', text: 'جیب' },
-            { lang: 'ar', label: 'AR', text: 'جيب' },
-            { lang: 'en', label: 'EN', text: 'Pocket' }
+            { lang: 'fa', label: 'FA' },
+            { lang: 'ar', label: 'AR' },
+            { lang: 'en', label: 'EN' }
         ];
         let langIndex = 0;
 
@@ -1119,15 +1190,57 @@
             const lang = LANGUAGES[index];
             currentLang = lang.lang;
             langBtn.textContent = `🌐 ${lang.label}`;
-            document.querySelector('.logo-mini .logo-text').textContent = lang.text;
-            searchInput.placeholder = getLocalText(
-                'چی می‌خوای بگی؟ بنویس...',
-                'What do you want to say? Type...',
-                'ماذا تريد أن تقول؟ اكتب...'
-            );
+
+            // ===== به‌روزرسانی کل متن‌های سایت =====
+
+            // title صفحه
+            document.title = t('title');
+
+            // برند سایدبار
+            document.getElementById('brandText').textContent = t('brand');
+
+            // placeholder جستجو
+            searchInput.placeholder = t('search_placeholder');
+
+            // منوی سایدبار
+            const navLabels = document.querySelectorAll('.sidebar-nav .nav-label');
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+            const navMap = ['home', 'explore', 'notes', 'chatgpt', 'deepseek', 'bookmarks', 'stats'];
+            // فقط آیتم‌هایی که label دارن رو آپدیت کن
+            const labelKeys = ['home', 'explore', 'notes', 'bookmarks', 'stats'];
+            navItems.forEach((item, idx) => {
+                const page = item.dataset.page;
+                if (labelKeys.includes(page)) {
+                    const label = item.querySelector('.nav-label');
+                    if (label) label.textContent = t(page);
+                }
+                // ChatGPT و DeepSeek ثابت می‌مانند
+            });
+
+            // دکمه برگشت
+            document.querySelector('.back-btn').innerHTML = `<i class="fas fa-arrow-right"></i> ${t('home')}`;
+
+            // دکمه‌های افزودن
+            document.querySelector('.add-actions .submit').textContent = `➕ ${t('add_with')}`;
+            document.querySelector('.add-actions .cancel').textContent = t('home');
+
+            // placeholder های پنل افزودن
+            addEng.placeholder = 'English (e.g. I\'m going to the store)';
+            addFa.placeholder = t('add_new');
+            addAr.placeholder = 'العربية (مثلاً أنا ذاهب إلى المتجر)';
+
+            // برچسب رنگ
+            document.querySelector('.color-picker-wrap label').innerHTML = `<i class="fas fa-palette"></i> ${t('tags')}:`;
+
+            // اطلاعات پایین
+            updateInfo();
+
+            // رندر مجدد
             renderFilterGrid();
             if (results.classList.contains('visible')) renderResults();
-            updateInfo();
+
+            // میکروفون
+            if (micText) micText.textContent = t('speak_to_search');
         }
 
         langBtn.onclick = () => {
@@ -1140,9 +1253,8 @@
         // ============================================================
         function renderFilterGrid() {
             const allTags = getAllTags();
-            const allLabel = getLocalText('همه', 'All', 'الكل');
             filterGrid.innerHTML =
-                `<button class="filter-chip ${!activeFilter ? 'active' : ''}" data-tag=""><span>🏷️</span> ${allLabel} <span class="count">(${expressions.length})</span></button>`;
+                `<button class="filter-chip ${!activeFilter ? 'active' : ''}" data-tag=""><span>🏷️</span> ${t('all')} <span class="count">(${expressions.length})</span></button>`;
 
             allTags.forEach(tag => {
                 const count = getTagCount(tag);
@@ -1196,14 +1308,15 @@
                 );
             }
 
-            resultCount.textContent = `${items.length} ${getLocalText('نتیجه', 'result', 'نتيجة')}`;
+            const resultWord = items.length === 1 ? t('result') : t('results');
+            resultCount.textContent = `${items.length} ${resultWord}`;
 
             if (!items.length) {
                 cardsContainer.innerHTML = `
                         <div class="empty">
                             <i class="fas fa-search"></i>
-                            <div class="title">${getLocalText('چیزی پیدا نشد', 'Nothing found', 'لم يتم العثور على شيء')}</div>
-                            <div class="desc">${getLocalText('جمله جدید اضافه کن ✨', 'Add a new sentence ✨', 'أضف جملة جديدة ✨')}</div>
+                            <div class="title">${t('nothing_found')}</div>
+                            <div class="desc">${t('add_new')}</div>
                         </div>
                     `;
                 return;
@@ -1212,7 +1325,6 @@
             let html = '';
             items.forEach(expr => {
                 const saved = bookmarks.some(b => b.eng === expr.eng);
-                // رنگ لاین: از color استفاده می‌کنیم، اگر موجود نباشه پیش‌فرض #2fb557
                 const borderColor = expr.color || '#2fb557';
                 html += `
                         <div class="card" data-eng="${expr.eng}" style="border-right-color: ${borderColor};">
@@ -1225,8 +1337,7 @@
                                     <div class="tags">${expr.tags.map(t => `<span data-tag="${t}"><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
                                 </div>
                                 <div class="actions">
-                                    <!-- دکمه ضبط صدا (ریکورد) به جای پخش -->
-                                    <button class="record-btn" data-eng="${expr.eng}" title="ضبط صدا"><i class="fas fa-microphone"></i></button>
+                                    <button class="record-btn" data-eng="${expr.eng}" title="${t('mic_not_supported')}"><i class="fas fa-microphone"></i></button>
                                     <button class="bookmark-btn ${saved ? 'saved' : ''}" data-eng="${expr.eng}"><i class="fas fa-bookmark"></i></button>
                                     <button class="delete-btn" data-eng="${expr.eng}"><i class="fas fa-trash-alt"></i></button>
                                 </div>
@@ -1237,28 +1348,79 @@
 
             cardsContainer.innerHTML = html;
 
-            // ===== دکمه ضبط صدا =====
+            // ===== دکمه ضبط سه‌حالته =====
             document.querySelectorAll('.record-btn').forEach(btn => {
+                let state = 'idle';
+                let mediaRecorder = null;
+                let audioChunks = [];
+                let audioBlob = null;
+                let audioUrl = null;
+
                 btn.onclick = (e) => {
                     e.stopPropagation();
+                    const card = btn.closest('.card');
                     const eng = btn.dataset.eng;
-                    // محو کردن تمام چانک‌ها (کارت‌ها)
-                    document.querySelectorAll('.card').forEach(c => c.style.opacity = '0.3');
-                    // هایلایت کارت مورد نظر
-                    const parentCard = btn.closest('.card');
-                    if (parentCard) parentCard.style.opacity = '1';
-
-                    // شروع ضبط (شبیه‌سازی با گفتار)
                     const expr = expressions.find(e => e.eng === eng);
-                    if (expr) {
-                        // ضبط صدا: فقط گفتار را پخش می‌کنیم (شبیه‌سازی ضبط)
-                        btn.classList.add('recording');
-                        speak(expr.eng);
-                        setTimeout(() => {
+                    if (!expr) return;
+
+                    if (state === 'idle') {
+                        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                            alert(t('mic_not_supported'));
+                            return;
+                        }
+                        navigator.mediaDevices.getUserMedia({ audio: true })
+                            .then(stream => {
+                                mediaRecorder = new MediaRecorder(stream);
+                                audioChunks = [];
+                                mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+                                mediaRecorder.onstop = () => {
+                                    audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                                    audioUrl = URL.createObjectURL(audioBlob);
+                                    stream.getTracks().forEach(track => track.stop());
+                                    state = 'played';
+                                    btn.innerHTML = '<i class="fas fa-play"></i>';
+                                    btn.classList.remove('recording');
+                                    btn.classList.add('played');
+                                    card.classList.remove('recording-active');
+                                };
+                                mediaRecorder.start();
+                                state = 'recording';
+                                btn.innerHTML = '<i class="fas fa-stop"></i>';
+                                btn.classList.add('recording');
+                                btn.classList.remove('played');
+                                card.classList.add('recording-active');
+                                setTimeout(() => {
+                                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                                        mediaRecorder.stop();
+                                    }
+                                }, 10000);
+                            })
+                            .catch(() => alert(t('mic_denied')));
+                    } else if (state === 'recording') {
+                        if (mediaRecorder && mediaRecorder.state === 'recording') {
+                            mediaRecorder.stop();
+                        }
+                    } else if (state === 'played') {
+                        if (audioUrl) {
+                            const audio = new Audio(audioUrl);
+                            audio.play();
+                            audio.onended = () => {
+                                state = 'idle';
+                                btn.innerHTML = '<i class="fas fa-microphone"></i>';
+                                btn.classList.remove('played');
+                                btn.classList.remove('recording');
+                                card.classList.remove('recording-active');
+                                URL.revokeObjectURL(audioUrl);
+                                audioUrl = null;
+                                audioBlob = null;
+                            };
+                        } else {
+                            state = 'idle';
+                            btn.innerHTML = '<i class="fas fa-microphone"></i>';
+                            btn.classList.remove('played');
                             btn.classList.remove('recording');
-                            // برگرداندن opacity همه کارت‌ها
-                            document.querySelectorAll('.card').forEach(c => c.style.opacity = '1');
-                        }, 1500);
+                            card.classList.remove('recording-active');
+                        }
                     }
                 };
             });
@@ -1287,7 +1449,7 @@
                 btn.onclick = (e) => {
                     e.stopPropagation();
                     const eng = btn.dataset.eng;
-                    if (confirm(getLocalText(`حذف "${eng}"؟`, `Delete "${eng}"?`, `حذف "${eng}"؟`))) {
+                    if (confirm(t('delete_confirm', eng))) {
                         const idx = expressions.findIndex(e => e.eng === eng);
                         if (idx > -1) {
                             expressions.splice(idx, 1);
@@ -1341,8 +1503,8 @@
                 cardsContainer.innerHTML = `
                         <div class="empty">
                             <i class="fas fa-plus-circle"></i>
-                            <div class="title">${getLocalText('هنوز جمله‌ای اضافه نشده', 'No sentences yet', 'لا توجد جمل بعد')}</div>
-                            <div class="desc">${getLocalText('با + اضافه کن ✨', 'Add with + ✨', 'أضف باستخدام + ✨')}</div>
+                            <div class="title">${t('no_sentences')}</div>
+                            <div class="desc">${t('add_with')}</div>
                         </div>
                     `;
                 resultCount.textContent = '۰ نتیجه';
@@ -1355,11 +1517,10 @@
         }
 
         // ============================================================
-        // افزودن جمله با رنگ
+        // افزودن جمله
         // ============================================================
         function openAddPanel() {
             addPanel.classList.add('open');
-            // تنظیم رنگ پیش‌فرض روی سبز
             cardColor.value = '#2fb557';
             addPanel.style.borderRightColor = '#2fb557';
             renderAddTags();
@@ -1370,7 +1531,6 @@
             }
         }
 
-        // تغییر رنگ در لحظه
         cardColor.addEventListener('input', function() {
             addPanel.style.borderRightColor = this.value;
         });
@@ -1385,7 +1545,7 @@
 
         function renderAddTags() {
             const allTags = getAllTags();
-            addTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.2);">تگ‌ها:</span>`;
+            addTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.2);">${t('tags')}:</span>`;
             allTags.forEach(tag => {
                 const chip = document.createElement('span');
                 chip.className = 'tag-chip';
@@ -1400,10 +1560,10 @@
             const eng = addEng.value.trim();
             const fa = addFa.value.trim();
             const ar = addAr.value.trim();
-            const color = cardColor.value; // رنگ انتخاب شده
+            const color = cardColor.value;
 
             if (!eng || !fa) {
-                alert(getLocalText('انگلیسی و فارسی الزامی است', 'English and Persian required', 'الإنجليزية والفارسية مطلوبة'));
+                alert(t('eng_required'));
                 return;
             }
 
@@ -1413,7 +1573,7 @@
             });
 
             if (!tags.length) {
-                alert(getLocalText('حداقل یک تگ انتخاب کنید', 'Select at least one tag', 'اختر علامة واحدة على الأقل'));
+                alert(t('tag_required'));
                 return;
             }
 
@@ -1423,7 +1583,7 @@
                 fa,
                 ar,
                 tags,
-                color: color // ذخیره رنگ
+                color: color
             });
 
             saveData();
@@ -1504,7 +1664,7 @@
                         cardsContainer.innerHTML = `
                                 <div class="empty">
                                     <i class="fas fa-bookmark"></i>
-                                    <div class="title">${getLocalText('نشانی وجود ندارد', 'No bookmarks', 'لا توجد علامات مرجعية')}</div>
+                                    <div class="title">${t('no_bookmarks')}</div>
                                 </div>
                             `;
                         resultCount.textContent = '۰ نتیجه';
@@ -1523,28 +1683,88 @@
                                                 <div class="tags">${expr.tags.map(t => `<span><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
                                             </div>
                                             <div class="actions">
-                                                <button class="record-btn" data-eng="${expr.eng}" title="ضبط صدا"><i class="fas fa-microphone"></i></button>
+                                                <button class="record-btn" data-eng="${expr.eng}" title="${t('mic_not_supported')}"><i class="fas fa-microphone"></i></button>
                                             </div>
                                         </div>
                                     </div>
                                 `;
                         });
                         cardsContainer.innerHTML = html;
-                        resultCount.textContent = `${bookmarks.length} ${getLocalText('نتیجه', 'result', 'نتيجة')}`;
+                        const resultWord = bookmarks.length === 1 ? t('result') : t('results');
+                        resultCount.textContent = `${bookmarks.length} ${resultWord}`;
 
                         document.querySelectorAll('.record-btn').forEach(btn => {
+                            let state = 'idle';
+                            let mediaRecorder = null;
+                            let audioChunks = [];
+                            let audioBlob = null;
+                            let audioUrl = null;
+
                             btn.onclick = () => {
-                                const expr = expressions.find(e => e.eng === btn.dataset.eng);
-                                if (expr) {
-                                    document.querySelectorAll('.card').forEach(c => c.style.opacity = '0.3');
-                                    const parent = btn.closest('.card');
-                                    if (parent) parent.style.opacity = '1';
-                                    btn.classList.add('recording');
-                                    speak(expr.eng);
-                                    setTimeout(() => {
+                                const card = btn.closest('.card');
+                                const eng = btn.dataset.eng;
+                                const expr = expressions.find(e => e.eng === eng);
+                                if (!expr) return;
+
+                                if (state === 'idle') {
+                                    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                                        alert(t('mic_not_supported'));
+                                        return;
+                                    }
+                                    navigator.mediaDevices.getUserMedia({ audio: true })
+                                        .then(stream => {
+                                            mediaRecorder = new MediaRecorder(stream);
+                                            audioChunks = [];
+                                            mediaRecorder.ondataavailable = event => audioChunks.push(event
+                                            .data);
+                                            mediaRecorder.onstop = () => {
+                                                audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                                                audioUrl = URL.createObjectURL(audioBlob);
+                                                stream.getTracks().forEach(track => track.stop());
+                                                state = 'played';
+                                                btn.innerHTML = '<i class="fas fa-play"></i>';
+                                                btn.classList.remove('recording');
+                                                btn.classList.add('played');
+                                                card.classList.remove('recording-active');
+                                            };
+                                            mediaRecorder.start();
+                                            state = 'recording';
+                                            btn.innerHTML = '<i class="fas fa-stop"></i>';
+                                            btn.classList.add('recording');
+                                            btn.classList.remove('played');
+                                            card.classList.add('recording-active');
+                                            setTimeout(() => {
+                                                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                                                    mediaRecorder.stop();
+                                                }
+                                            }, 10000);
+                                        })
+                                        .catch(() => alert(t('mic_denied')));
+                                } else if (state === 'recording') {
+                                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                                        mediaRecorder.stop();
+                                    }
+                                } else if (state === 'played') {
+                                    if (audioUrl) {
+                                        const audio = new Audio(audioUrl);
+                                        audio.play();
+                                        audio.onended = () => {
+                                            state = 'idle';
+                                            btn.innerHTML = '<i class="fas fa-microphone"></i>';
+                                            btn.classList.remove('played');
+                                            btn.classList.remove('recording');
+                                            card.classList.remove('recording-active');
+                                            URL.revokeObjectURL(audioUrl);
+                                            audioUrl = null;
+                                            audioBlob = null;
+                                        };
+                                    } else {
+                                        state = 'idle';
+                                        btn.innerHTML = '<i class="fas fa-microphone"></i>';
+                                        btn.classList.remove('played');
                                         btn.classList.remove('recording');
-                                        document.querySelectorAll('.card').forEach(c => c.style.opacity = '1');
-                                    }, 1500);
+                                        card.classList.remove('recording-active');
+                                    }
                                 }
                             };
                         });
@@ -1559,24 +1779,24 @@
                     backWrap.classList.add('visible');
                     cardsContainer.innerHTML = `
                             <div style="padding:10px 0;">
-                                <div style="font-size:16px; font-weight:700; color:#2fb557; margin-bottom:12px;">📊 ${getLocalText('آمار', 'Statistics', 'إحصائيات')}</div>
+                                <div style="font-size:16px; font-weight:700; color:#2fb557; margin-bottom:12px;">📊 ${t('statistics')}</div>
                                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
                                     <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${expressions.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('جمله', 'Sentences', 'جمل')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('sentences')}</div>
                                     </div>
                                     <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${allTags.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('تگ', 'Tags', 'علامات')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('tags')}</div>
                                     </div>
                                     <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
                                         <div style="font-size:20px; font-weight:700; color:#2fb557;">${bookmarks.length}</div>
-                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('نشان', 'Bookmarks', 'علامات مرجعية')}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${t('bookmarks')}</div>
                                     </div>
                                 </div>
                             </div>
                         `;
-                    resultCount.textContent = '📊 آمار';
+                    resultCount.textContent = '📊 ' + t('statistics');
                     closeSidebarPanel();
                     return;
                 }
@@ -1590,18 +1810,18 @@
         // ============================================================
         function updateInfo() {
             const allTags = getAllTags();
-            info.textContent = `${expressions.length} ${getLocalText('جمله', 'sentences', 'جمل')} • ${allTags.length} ${getLocalText('تگ', 'tags', 'علامات')}`;
+            info.textContent = `${expressions.length} ${t('sentences')} • ${allTags.length} ${t('tags')}`;
         }
 
         // ============================================================
-        // میکروفون
+        // میکروفون جستجو
         // ============================================================
         let recognition = null;
         let isMicActive = false;
 
         function initSpeech() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                micText.textContent = 'پشتیبانی نمی‌شود';
+                micText.textContent = t('mic_not_supported');
                 return;
             }
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1610,7 +1830,7 @@
             recognition.continuous = false;
             recognition.interimResults = true;
             recognition.onstart = () => {
-                micText.textContent = getLocalText('در حال گوش دادن...', 'Listening...', 'جاري الاستماع...');
+                micText.textContent = t('listening');
                 micResult.textContent = '';
             };
             recognition.onresult = (event) => {
@@ -1629,7 +1849,7 @@
                 micResult.textContent = transcript;
             };
             recognition.onerror = () => {
-                micText.textContent = getLocalText('خطا', 'Error', 'خطأ');
+                micText.textContent = t('error');
                 setTimeout(() => { micOverlay.classList.remove('open');
                     isMicActive = false; }, 800);
             };
@@ -1644,12 +1864,12 @@
         function startMic() {
             if (isMicActive) return;
             if (!recognition) initSpeech();
-            if (!recognition) { alert('پشتیبانی نمی‌شود'); return; }
+            if (!recognition) { alert(t('mic_not_supported')); return; }
             recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
             micOverlay.classList.add('open');
             isMicActive = true;
             micResult.textContent = '';
-            micText.textContent = getLocalText('برای جستجو صحبت کنید...', 'Speak to search...', 'تحدث للبحث...');
+            micText.textContent = t('speak_to_search');
             try { recognition.start(); } catch (e) {}
         }
 
@@ -1704,8 +1924,8 @@
             cardsContainer.innerHTML = `
                     <div class="empty">
                         <i class="fas fa-plus-circle"></i>
-                        <div class="title">${getLocalText('هنوز جمله‌ای اضافه نشده', 'No sentences yet', 'لا توجد جمل بعد')}</div>
-                        <div class="desc">${getLocalText('با + اضافه کن ✨', 'Add with + ✨', 'أضف باستخدام + ✨')}</div>
+                        <div class="title">${t('no_sentences')}</div>
+                        <div class="desc">${t('add_with')}</div>
                     </div>
                 `;
             resultCount.textContent = '۰ نتیجه';
@@ -1714,10 +1934,10 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — نسخه نهایی با لاین رنگی و ضبط صدا');
+        console.log('✅ جیب — نسخه نهایی با ترجمه کامل کل سایت');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('🌐 تغییر زبان فقط با کلیک روی دکمه');
+        console.log('🌐 زبان کل سایت با یک دکمه تغییر می‌کند');
     </script>
 </body>
 </html>
