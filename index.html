@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>جیب ✦ موتور جستجوی زندگی روزمره</title>
+    <link rel="icon" href="https://uploadkon.ir/uploads/be1525_26jiblogo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 16px 20px;
+        }
+
+        .green {
+            color: #2fb557;
+        }
+        .bg-green {
+            background: #2fb557;
+        }
+        .border-green {
+            border-color: #2fb557;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(47, 181, 87, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(47, 181, 87, 0.12);
+            color: #aaa;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .menu-btn:hover {
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        .logo-mini {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo-mini img {
+            height: 28px;
+            width: auto;
+        }
+
+        .logo-mini .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            color: #2fb557;
+            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(47, 181, 87, 0.12);
+            color: #aaa;
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .lang-btn:hover {
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        /* ===== لوگوی بزرگ ===== */
+        .logo-big-wrap {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0 30px;
+        }
+
+        .logo-big-wrap img {
+            height: clamp(80px, 20vw, 160px);
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 30px rgba(47, 181, 87, 0.08));
+        }
+
+        /* ===== جستجو ===== */
+        .search-wrapper {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(47, 181, 87, 0.12);
+            border-radius: 16px;
+            padding: 4px 4px 4px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #2fb557;
+            box-shadow: 0 0 0 3px rgba(47, 181, 87, 0.08);
+        }
+
+        .search-box .search-icon {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 0;
+            font-size: 15px;
+            color: #fff;
+            outline: none;
+            font-family: inherit;
+            min-height: 46px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-box .actions {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .search-box .actions button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.08);
+            color: #888;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .search-box .actions button:hover {
+            border-color: #2fb557;
+            color: #2fb557;
+            background: rgba(47, 181, 87, 0.05);
+        }
+
+        .search-box .actions .add-btn {
+            color: #2fb557;
+            font-size: 18px;
+        }
+        .search-box .actions .add-btn:hover {
+            background: rgba(47, 181, 87, 0.12);
+        }
+
+        .search-box .actions .filter-btn {
+            width: auto;
+            padding: 0 12px;
+            border-radius: 20px;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .filter-badge {
+            background: #2fb557;
+            color: #fff;
+            font-size: 9px;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box .actions .mic-active {
+            color: #2fb557;
+            border-color: #2fb557;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* ===== فیلتر ===== */
+        .filter-dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: #141414;
+            border: 1px solid rgba(47, 181, 87, 0.08);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: none;
+            max-height: 180px;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        .filter-dropdown.open {
+            display: block;
+        }
+
+        .filter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .filter-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.06);
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 11px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .filter-chip:hover {
+            background: rgba(47, 181, 87, 0.05);
+            border-color: #2fb557;
+            color: #fff;
+        }
+
+        .filter-chip.active {
+            background: rgba(47, 181, 87, 0.1);
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        .filter-chip .count {
+            font-size: 9px;
+            opacity: 0.4;
+        }
+
+        /* ===== پنل افزودن با لاین رنگی ===== */
+        .add-panel {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.08);
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 10px;
+            display: none;
+            position: relative;
+            /* لاین رنگی سمت راست باکس */
+            border-right: 4px solid #2fb557;
+            /* رنگ پیش‌فرض */
+            transition: border-color 0.3s;
+        }
+
+        .add-panel.open {
+            display: block;
+        }
+
+        /* انتخابگر رنگ — استایل جدید */
+        .color-picker-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-picker-wrap label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .color-picker-wrap input[type="color"] {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(47, 181, 87, 0.2);
+            border-radius: 8px;
+            background: transparent;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .color-picker-wrap input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        .color-picker-wrap input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
+
+        .add-panel input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.08);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            font-family: inherit;
+            margin-bottom: 6px;
+        }
+
+        .add-panel input:focus {
+            border-color: #2fb557;
+        }
+
+        .add-panel input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .add-panel .tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 6px 0;
+        }
+
+        .add-panel .tags-wrap .tag-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.06);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 11px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .add-panel .tags-wrap .tag-chip:hover {
+            background: rgba(47, 181, 87, 0.05);
+            border-color: #2fb557;
+        }
+
+        .add-panel .tags-wrap .tag-chip.active {
+            background: rgba(47, 181, 87, 0.1);
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        .add-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .add-actions button {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .add-actions .submit {
+            background: #2fb557;
+            color: #fff;
+        }
+        .add-actions .submit:hover {
+            opacity: 0.85;
+            transform: scale(1.02);
+        }
+
+        .add-actions .cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            border: 1px solid rgba(47, 181, 87, 0.06);
+        }
+        .add-actions .cancel:hover {
+            border-color: #2fb557;
+            color: #fff;
+        }
+
+        /* ===== نتایج ===== */
+        .results {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .results.visible {
+            display: block;
+        }
+
+        .results .count {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.25);
+            padding: 0 4px 8px;
+            display: block;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* کارت با لاین رنگی سمت راست */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.06);
+            border-radius: 12px;
+            padding: 12px 14px;
+            transition: 0.3s;
+            position: relative;
+            border-right: 4px solid #2fb557;
+            /* لاین رنگی پیش‌فرض */
+        }
+
+        .card:hover {
+            border-color: rgba(47, 181, 87, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .card .top {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card .eng {
+            font-weight: 700;
+            font-size: 15px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .card .pron {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+            direction: ltr;
+            text-align: left;
+        }
+
+        .card .fa {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 2px;
+        }
+
+        .card .ar {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            direction: rtl;
+        }
+
+        .card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .card .tags span {
+            font-size: 10px;
+            background: rgba(47, 181, 87, 0.04);
+            border: 1px solid rgba(47, 181, 87, 0.04);
+            border-radius: 20px;
+            padding: 1px 8px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .card .tags span:hover {
+            background: rgba(47, 181, 87, 0.08);
+            border-color: #2fb557;
+            color: #fff;
+        }
+
+        .card .actions {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .card .actions button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.06);
+            color: #666;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .card .actions button:hover {
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        .card .actions .saved {
+            color: #2fb557;
+            border-color: rgba(47, 181, 87, 0.2);
+        }
+
+        .card .actions .delete-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* دکمه ضبط (ریکورد) */
+        .card .actions .record-btn {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        .card .actions .record-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        .card .actions .record-btn.recording {
+            animation: pulse 1s infinite;
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* ===== خالی ===== */
+        .empty {
+            text-align: center;
+            padding: 30px 10px;
+            opacity: 0.3;
+        }
+        .empty i {
+            font-size: 30px;
+            color: #2fb557;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .empty .title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .empty .desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+        }
+
+        /* ===== برگشت ===== */
+        .back-wrap {
+            width: 100%;
+            max-width: 600px;
+            display: none;
+            margin-bottom: 6px;
+        }
+
+        .back-wrap.visible {
+            display: flex;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(47, 181, 87, 0.06);
+            color: #888;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-btn:hover {
+            border-color: #2fb557;
+            color: #2fb557;
+        }
+
+        /* ===== سایدبار ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            max-width: 85vw;
+            height: 100%;
+            background: #111;
+            border-left: 1px solid rgba(47, 181, 87, 0.08);
+            z-index: 1000;
+            padding: 20px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar .side-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(47, 181, 87, 0.08);
+            margin-bottom: 14px;
+        }
+
+        .sidebar .brand {
+            font-size: 20px;
+            font-weight: 900;
+            color: #2fb557;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar .brand img {
+            height: 28px;
+        }
+
+        .sidebar-close {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .sidebar-close:hover {
+            color: #fff;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+            text-align: right;
+        }
+
+        .sidebar-nav .nav-item:hover {
+            background: rgba(47, 181, 87, 0.05);
+            color: #fff;
+        }
+
+        .sidebar-nav .nav-item.active {
+            background: rgba(47, 181, 87, 0.06);
+            color: #2fb557;
+        }
+
+        .sidebar-nav .nav-item i {
+            width: 20px;
+        }
+
+        .sidebar-nav .divider {
+            border: none;
+            border-top: 1px solid rgba(47, 181, 87, 0.06);
+            margin: 8px 0;
+        }
+
+        .sidebar-nav .nav-item .badge {
+            background: #2fb557;
+            color: #fff;
+            font-size: 9px;
+            padding: 1px 8px;
+            border-radius: 20px;
+            margin-right: auto;
+        }
+
+        /* ===== اطلاعات پایین ===== */
+        .info {
+            margin-top: 12px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.12);
+            text-align: center;
+        }
+
+        /* ===== میکروفون ===== */
+        .mic-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mic-overlay.open {
+            display: flex;
+        }
+
+        .mic-overlay .icon {
+            font-size: 50px;
+            color: #2fb557;
+            animation: pulse 1s infinite;
+        }
+
+        .mic-overlay .text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .mic-overlay .result {
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(47, 181, 87, 0.08);
+        }
+
+        .mic-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ===== responsive ===== */
+        @media (max-width: 600px) {
+            .search-box input {
+                font-size: 13px;
+                min-height: 38px;
+            }
+            .search-box .actions button {
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
+            }
+            .search-box .actions .filter-btn {
+                padding: 0 8px;
+                font-size: 10px;
+            }
+            .logo-big-wrap img {
+                height: clamp(60px, 15vw, 100px);
+            }
+            .logo-mini img {
+                height: 22px;
+            }
+            .logo-mini .logo-text {
+                font-size: 16px;
+            }
+            .header {
+                padding: 8px 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+            <div class="logo-mini">
+                <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
+                <span class="logo-text">جیب</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="lang-btn" id="langBtn">🌐 FA</button>
+        </div>
+    </header>
+
+    <!-- ===== میکروفون ===== -->
+    <div class="mic-overlay" id="micOverlay">
+        <button class="mic-close" id="micClose"><i class="fas fa-times"></i></button>
+        <div class="icon"><i class="fas fa-microphone"></i></div>
+        <div class="text" id="micText">برای جستجو صحبت کنید...</div>
+        <div class="result" id="micResult"></div>
+    </div>
+
+    <!-- ===== محتوای اصلی ===== -->
+    <div style="width:100%; max-width:600px;">
+
+        <!-- لوگوی بزرگ -->
+        <div class="logo-big-wrap">
+            <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
+        </div>
+
+        <!-- جستجو -->
+        <div class="search-wrapper">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="چی می‌خوای بگی؟ بنویس..." />
+                <div class="actions">
+                    <button class="add-btn" id="addBtn" title="افزودن"><i class="fas fa-plus-circle"></i></button>
+                    <button class="filter-btn" id="filterBtn">
+                        <i class="fas fa-sliders-h"></i>
+                        <span class="filter-badge" id="filterBadge">0</span>
+                    </button>
+                    <button id="micBtn"><i class="fas fa-microphone"></i></button>
+                    <button id="clearBtn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+
+            <!-- فیلتر -->
+            <div class="filter-dropdown" id="filterDropdown">
+                <div class="filter-grid" id="filterGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== پنل افزودن با انتخابگر رنگ ===== -->
+        <div class="add-panel" id="addPanel">
+            <input id="addEng" placeholder="English (e.g. I'm going to the store)" />
+            <input id="addFa" placeholder="فارسی (مثلاً دارم می‌رم فروشگاه)" />
+            <input id="addAr" placeholder="العربية (مثلاً أنا ذاهب إلى المتجر)" />
+
+            <!-- انتخابگر رنگ برای لاین کناری -->
+            <div class="color-picker-wrap">
+                <label for="cardColor"><i class="fas fa-palette"></i> رنگ لاین:</label>
+                <input type="color" id="cardColor" value="#2fb557" />
+            </div>
+
+            <div class="tags-wrap" id="addTagsWrap">
+                <span style="font-size:10px; color:rgba(255,255,255,0.2);">تگ‌ها:</span>
+            </div>
+            <div class="add-actions">
+                <button class="submit" id="addSubmit">➕ افزودن</button>
+                <button class="cancel" id="addCancel">لغو</button>
+            </div>
+        </div>
+
+        <!-- برگشت -->
+        <div class="back-wrap" id="backWrap">
+            <button class="back-btn" id="backBtn"><i class="fas fa-arrow-right"></i> برگشت</button>
+        </div>
+
+        <!-- نتایج -->
+        <div class="results" id="results">
+            <span class="count" id="resultCount">۰ نتیجه</span>
+            <div class="cards" id="cardsContainer"></div>
+        </div>
+
+        <!-- اطلاعات -->
+        <div class="info" id="info">0 جمله • 0 تگ</div>
+    </div>
+
+    <!-- ===== سایدبار ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="side-header">
+            <div class="brand">
+                <img src="https://uploadkon.ir/uploads/be1525_26jiblogo.png" alt="جیب" />
+                جیب
+            </div>
+            <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-page="home"><i class="fas fa-home"></i> صفحه اصلی</button>
+            <button class="nav-item" data-page="explore"><i class="fas fa-compass"></i> اکسپلور</button>
+            <button class="nav-item" data-page="notes"><i class="fas fa-sticky-note"></i> یادداشت <span class="badge">nts</span></button>
+            <button class="nav-item" data-page="chatgpt"><i class="fas fa-robot"></i> ChatGPT</button>
+            <button class="nav-item" data-page="deepseek"><i class="fas fa-brain"></i> DeepSeek</button>
+            <hr class="divider" />
+            <button class="nav-item" data-page="bookmarks"><i class="fas fa-bookmark"></i> نشان‌ها</button>
+            <button class="nav-item" data-page="stats"><i class="fas fa-chart-simple"></i> آمار</button>
+        </nav>
+    </aside>
+
+    <script>
+        // ============================================================
+        // داده‌ها
+        // ============================================================
+        let expressions = [];
+        let bookmarks = [];
+        let currentLang = 'fa';
+        let activeFilter = null;
+        let searchQuery = '';
+
+        // تگ‌های استاندارد
+        const TAGS = [
+            { id: 'greeting', icon: '👋', fa: 'احوالپرسی', en: 'Greeting', ar: 'تحية' },
+            { id: 'daily', icon: '🌅', fa: 'روزمره', en: 'Daily', ar: 'يومي' },
+            { id: 'food', icon: '🍔', fa: 'غذا', en: 'Food', ar: 'طعام' },
+            { id: 'drink', icon: '☕', fa: 'نوشیدنی', en: 'Drink', ar: 'مشروب' },
+            { id: 'work', icon: '💼', fa: 'کار', en: 'Work', ar: 'عمل' },
+            { id: 'study', icon: '📚', fa: 'مطالعه', en: 'Study', ar: 'دراسة' },
+            { id: 'health', icon: '🏥', fa: 'سلامت', en: 'Health', ar: 'صحة' },
+            { id: 'emotion', icon: '😊', fa: 'احساسات', en: 'Emotion', ar: 'عاطفة' },
+            { id: 'social', icon: '👥', fa: 'اجتماعی', en: 'Social', ar: 'اجتماعي' },
+            { id: 'shopping', icon: '🛒', fa: 'خرید', en: 'Shopping', ar: 'تسوق' },
+            { id: 'travel', icon: '✈️', fa: 'سفر', en: 'Travel', ar: 'سفر' },
+            { id: 'home', icon: '🏠', fa: 'خانه', en: 'Home', ar: 'منزل' },
+            { id: 'tech', icon: '💻', fa: 'فناوری', en: 'Tech', ar: 'تكنولوجيا' },
+            { id: 'education', icon: '🎓', fa: 'آموزش', en: 'Education', ar: 'تعليم' },
+            { id: 'business', icon: '📊', fa: 'کسب‌وکار', en: 'Business', ar: 'أعمال' },
+            { id: 'weather', icon: '🌤️', fa: 'آب‌وهوا', en: 'Weather', ar: 'طقس' },
+            { id: 'time', icon: '⏰', fa: 'زمان', en: 'Time', ar: 'وقت' },
+            { id: 'family', icon: '👨‍👩‍👧', fa: 'خانواده', en: 'Family', ar: 'عائلة' },
+            { id: 'friend', icon: '🤝', fa: 'دوست', en: 'Friend', ar: 'صديق' },
+            { id: 'emergency', icon: '🚨', fa: 'اورژانس', en: 'Emergency', ar: 'طوارئ' }
+        ];
+
+        function getTagLabel(id) {
+            const t = TAGS.find(x => x.id === id);
+            if (!t) return id;
+            return t[currentLang] || t.fa;
+        }
+
+        function getTagIcon(id) {
+            const t = TAGS.find(x => x.id === id);
+            return t ? t.icon : '🏷️';
+        }
+
+        function getAllTags() {
+            const set = new Set();
+            expressions.forEach(e => e.tags.forEach(t => set.add(t)));
+            TAGS.forEach(t => set.add(t.id));
+            return Array.from(set);
+        }
+
+        function getTagCount(tag) {
+            return expressions.filter(e => e.tags.includes(tag)).length;
+        }
+
+        function loadData() {
+            try {
+                const raw = localStorage.getItem('jib_data');
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    expressions = data.expressions || [];
+                    bookmarks = data.bookmarks || [];
+                }
+            } catch (e) { expressions = [];
+                bookmarks = []; }
+        }
+
+        function saveData() {
+            localStorage.setItem('jib_data', JSON.stringify({ expressions, bookmarks }));
+        }
+
+        function generatePron(eng) {
+            return '/' + eng.toLowerCase().replace(/[^a-z ]/g, '').split(' ').map(w => {
+                return w.replace(/[aeiou]/g, m => ({ a: 'ə', e: 'ɛ', i: 'ɪ', o: 'oʊ', u: 'ʌ' })[m] || m);
+            }).join(' ') + '/';
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.rate = 0.85;
+            window.speechSynthesis.speak(u);
+        }
+
+        function getLocalText(fa, en, ar) {
+            if (currentLang === 'fa') return fa;
+            if (currentLang === 'en') return en;
+            return ar || fa;
+        }
+
+        // ============================================================
+        // DOM
+        // ============================================================
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const micBtn = document.getElementById('micBtn');
+        const filterBtn = document.getElementById('filterBtn');
+        const filterDropdown = document.getElementById('filterDropdown');
+        const filterGrid = document.getElementById('filterGrid');
+        const filterBadge = document.getElementById('filterBadge');
+        const results = document.getElementById('results');
+        const cardsContainer = document.getElementById('cardsContainer');
+        const resultCount = document.getElementById('resultCount');
+        const info = document.getElementById('info');
+        const backWrap = document.getElementById('backWrap');
+        const backBtn = document.getElementById('backBtn');
+        const addBtn = document.getElementById('addBtn');
+        const addPanel = document.getElementById('addPanel');
+        const addEng = document.getElementById('addEng');
+        const addFa = document.getElementById('addFa');
+        const addAr = document.getElementById('addAr');
+        const addTagsWrap = document.getElementById('addTagsWrap');
+        const addSubmit = document.getElementById('addSubmit');
+        const addCancel = document.getElementById('addCancel');
+        const cardColor = document.getElementById('cardColor'); // انتخابگر رنگ
+
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const langBtn = document.getElementById('langBtn');
+
+        const micOverlay = document.getElementById('micOverlay');
+        const micClose = document.getElementById('micClose');
+        const micText = document.getElementById('micText');
+        const micResult = document.getElementById('micResult');
+
+        // ============================================================
+        // تغییر زبان (دستی)
+        // ============================================================
+        const LANGUAGES = [
+            { lang: 'fa', label: 'FA', text: 'جیب' },
+            { lang: 'ar', label: 'AR', text: 'جيب' },
+            { lang: 'en', label: 'EN', text: 'Pocket' }
+        ];
+        let langIndex = 0;
+
+        function updateLanguage(index) {
+            const lang = LANGUAGES[index];
+            currentLang = lang.lang;
+            langBtn.textContent = `🌐 ${lang.label}`;
+            document.querySelector('.logo-mini .logo-text').textContent = lang.text;
+            searchInput.placeholder = getLocalText(
+                'چی می‌خوای بگی؟ بنویس...',
+                'What do you want to say? Type...',
+                'ماذا تريد أن تقول؟ اكتب...'
+            );
+            renderFilterGrid();
+            if (results.classList.contains('visible')) renderResults();
+            updateInfo();
+        }
+
+        langBtn.onclick = () => {
+            langIndex = (langIndex + 1) % LANGUAGES.length;
+            updateLanguage(langIndex);
+        };
+
+        // ============================================================
+        // فیلتر
+        // ============================================================
+        function renderFilterGrid() {
+            const allTags = getAllTags();
+            const allLabel = getLocalText('همه', 'All', 'الكل');
+            filterGrid.innerHTML =
+                `<button class="filter-chip ${!activeFilter ? 'active' : ''}" data-tag=""><span>🏷️</span> ${allLabel} <span class="count">(${expressions.length})</span></button>`;
+
+            allTags.forEach(tag => {
+                const count = getTagCount(tag);
+                const chip = document.createElement('button');
+                chip.className = `filter-chip ${activeFilter === tag ? 'active' : ''}`;
+                chip.dataset.tag = tag;
+                chip.innerHTML = `<span>${getTagIcon(tag)}</span> ${getTagLabel(tag)} <span class="count">(${count})</span>`;
+                chip.onclick = () => {
+                    activeFilter = activeFilter === tag ? null : tag;
+                    renderFilterGrid();
+                    updateFilterBadge();
+                    applyFilters();
+                    filterDropdown.classList.remove('open');
+                };
+                filterGrid.appendChild(chip);
+            });
+        }
+
+        function updateFilterBadge() {
+            if (activeFilter) {
+                filterBadge.style.display = 'flex';
+                filterBadge.textContent = '1';
+            } else {
+                filterBadge.style.display = 'none';
+            }
+        }
+
+        filterBtn.onclick = (e) => {
+            e.stopPropagation();
+            filterDropdown.classList.toggle('open');
+        };
+
+        document.addEventListener('click', () => {
+            filterDropdown.classList.remove('open');
+        });
+
+        // ============================================================
+        // نتایج
+        // ============================================================
+        function renderResults() {
+            let items = [...expressions];
+            if (activeFilter) items = items.filter(e => e.tags.includes(activeFilter));
+
+            const query = searchQuery.trim().toLowerCase();
+            if (query) {
+                items = items.filter(e =>
+                    e.eng.toLowerCase().includes(query) ||
+                    e.fa.includes(query) ||
+                    (e.ar && e.ar.includes(query)) ||
+                    e.tags.some(t => t.includes(query))
+                );
+            }
+
+            resultCount.textContent = `${items.length} ${getLocalText('نتیجه', 'result', 'نتيجة')}`;
+
+            if (!items.length) {
+                cardsContainer.innerHTML = `
+                        <div class="empty">
+                            <i class="fas fa-search"></i>
+                            <div class="title">${getLocalText('چیزی پیدا نشد', 'Nothing found', 'لم يتم العثور على شيء')}</div>
+                            <div class="desc">${getLocalText('جمله جدید اضافه کن ✨', 'Add a new sentence ✨', 'أضف جملة جديدة ✨')}</div>
+                        </div>
+                    `;
+                return;
+            }
+
+            let html = '';
+            items.forEach(expr => {
+                const saved = bookmarks.some(b => b.eng === expr.eng);
+                // رنگ لاین: از color استفاده می‌کنیم، اگر موجود نباشه پیش‌فرض #2fb557
+                const borderColor = expr.color || '#2fb557';
+                html += `
+                        <div class="card" data-eng="${expr.eng}" style="border-right-color: ${borderColor};">
+                            <div class="top">
+                                <div>
+                                    <div class="eng">${expr.eng}</div>
+                                    <div class="pron">${expr.pron}</div>
+                                    <div class="fa">${expr.fa}</div>
+                                    ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
+                                    <div class="tags">${expr.tags.map(t => `<span data-tag="${t}"><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
+                                </div>
+                                <div class="actions">
+                                    <!-- دکمه ضبط صدا (ریکورد) به جای پخش -->
+                                    <button class="record-btn" data-eng="${expr.eng}" title="ضبط صدا"><i class="fas fa-microphone"></i></button>
+                                    <button class="bookmark-btn ${saved ? 'saved' : ''}" data-eng="${expr.eng}"><i class="fas fa-bookmark"></i></button>
+                                    <button class="delete-btn" data-eng="${expr.eng}"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            });
+
+            cardsContainer.innerHTML = html;
+
+            // ===== دکمه ضبط صدا =====
+            document.querySelectorAll('.record-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const eng = btn.dataset.eng;
+                    // محو کردن تمام چانک‌ها (کارت‌ها)
+                    document.querySelectorAll('.card').forEach(c => c.style.opacity = '0.3');
+                    // هایلایت کارت مورد نظر
+                    const parentCard = btn.closest('.card');
+                    if (parentCard) parentCard.style.opacity = '1';
+
+                    // شروع ضبط (شبیه‌سازی با گفتار)
+                    const expr = expressions.find(e => e.eng === eng);
+                    if (expr) {
+                        // ضبط صدا: فقط گفتار را پخش می‌کنیم (شبیه‌سازی ضبط)
+                        btn.classList.add('recording');
+                        speak(expr.eng);
+                        setTimeout(() => {
+                            btn.classList.remove('recording');
+                            // برگرداندن opacity همه کارت‌ها
+                            document.querySelectorAll('.card').forEach(c => c.style.opacity = '1');
+                        }, 1500);
+                    }
+                };
+            });
+
+            // نشان
+            document.querySelectorAll('.bookmark-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const eng = btn.dataset.eng;
+                    const idx = bookmarks.findIndex(b => b.eng === eng);
+                    if (idx > -1) {
+                        bookmarks.splice(idx, 1);
+                        btn.classList.remove('saved');
+                    } else {
+                        const expr = expressions.find(e => e.eng === eng);
+                        if (expr) bookmarks.push({ ...expr });
+                        btn.classList.add('saved');
+                    }
+                    saveData();
+                    updateInfo();
+                };
+            });
+
+            // حذف
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const eng = btn.dataset.eng;
+                    if (confirm(getLocalText(`حذف "${eng}"؟`, `Delete "${eng}"?`, `حذف "${eng}"؟`))) {
+                        const idx = expressions.findIndex(e => e.eng === eng);
+                        if (idx > -1) {
+                            expressions.splice(idx, 1);
+                            const bIdx = bookmarks.findIndex(b => b.eng === eng);
+                            if (bIdx > -1) bookmarks.splice(bIdx, 1);
+                            saveData();
+                            applyFilters();
+                            renderFilterGrid();
+                            updateInfo();
+                        }
+                    }
+                };
+            });
+
+            // کلیک روی تگ
+            document.querySelectorAll('.tags span').forEach(el => {
+                el.onclick = (e) => {
+                    e.stopPropagation();
+                    const tag = el.dataset.tag;
+                    if (tag) {
+                        activeFilter = activeFilter === tag ? null : tag;
+                        renderFilterGrid();
+                        updateFilterBadge();
+                        applyFilters();
+                    }
+                };
+            });
+        }
+
+        function applyFilters() {
+            if (expressions.length > 0 || searchQuery.trim() || activeFilter) {
+                results.classList.add('visible');
+                backWrap.classList.add('visible');
+                renderResults();
+            } else {
+                results.classList.remove('visible');
+                backWrap.classList.remove('visible');
+            }
+            updateInfo();
+        }
+
+        function goBack() {
+            searchQuery = '';
+            searchInput.value = '';
+            activeFilter = null;
+            renderFilterGrid();
+            updateFilterBadge();
+            if (expressions.length === 0) {
+                results.classList.add('visible');
+                backWrap.classList.add('visible');
+                cardsContainer.innerHTML = `
+                        <div class="empty">
+                            <i class="fas fa-plus-circle"></i>
+                            <div class="title">${getLocalText('هنوز جمله‌ای اضافه نشده', 'No sentences yet', 'لا توجد جمل بعد')}</div>
+                            <div class="desc">${getLocalText('با + اضافه کن ✨', 'Add with + ✨', 'أضف باستخدام + ✨')}</div>
+                        </div>
+                    `;
+                resultCount.textContent = '۰ نتیجه';
+            } else {
+                results.classList.remove('visible');
+                backWrap.classList.remove('visible');
+            }
+            closeAddPanel();
+            updateInfo();
+        }
+
+        // ============================================================
+        // افزودن جمله با رنگ
+        // ============================================================
+        function openAddPanel() {
+            addPanel.classList.add('open');
+            // تنظیم رنگ پیش‌فرض روی سبز
+            cardColor.value = '#2fb557';
+            addPanel.style.borderRightColor = '#2fb557';
+            renderAddTags();
+            if (activeFilter) {
+                document.querySelectorAll('#addTagsWrap .tag-chip').forEach(chip => {
+                    if (chip.dataset.tag === activeFilter) chip.classList.add('active');
+                });
+            }
+        }
+
+        // تغییر رنگ در لحظه
+        cardColor.addEventListener('input', function() {
+            addPanel.style.borderRightColor = this.value;
+        });
+
+        function closeAddPanel() {
+            addPanel.classList.remove('open');
+            addEng.value = '';
+            addFa.value = '';
+            addAr.value = '';
+            addPanel.style.borderRightColor = '#2fb557';
+        }
+
+        function renderAddTags() {
+            const allTags = getAllTags();
+            addTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.2);">تگ‌ها:</span>`;
+            allTags.forEach(tag => {
+                const chip = document.createElement('span');
+                chip.className = 'tag-chip';
+                chip.dataset.tag = tag;
+                chip.textContent = `${getTagIcon(tag)} ${getTagLabel(tag)}`;
+                chip.onclick = () => chip.classList.toggle('active');
+                addTagsWrap.appendChild(chip);
+            });
+        }
+
+        function addPhrase() {
+            const eng = addEng.value.trim();
+            const fa = addFa.value.trim();
+            const ar = addAr.value.trim();
+            const color = cardColor.value; // رنگ انتخاب شده
+
+            if (!eng || !fa) {
+                alert(getLocalText('انگلیسی و فارسی الزامی است', 'English and Persian required', 'الإنجليزية والفارسية مطلوبة'));
+                return;
+            }
+
+            const tags = [];
+            document.querySelectorAll('#addTagsWrap .tag-chip.active').forEach(chip => {
+                tags.push(chip.dataset.tag);
+            });
+
+            if (!tags.length) {
+                alert(getLocalText('حداقل یک تگ انتخاب کنید', 'Select at least one tag', 'اختر علامة واحدة على الأقل'));
+                return;
+            }
+
+            expressions.push({
+                eng,
+                pron: generatePron(eng),
+                fa,
+                ar,
+                tags,
+                color: color // ذخیره رنگ
+            });
+
+            saveData();
+            closeAddPanel();
+            applyFilters();
+            renderFilterGrid();
+            updateInfo();
+        }
+
+        // ============================================================
+        // سایدبار
+        // ============================================================
+        function openSidebar() {
+            sidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+        }
+
+        function closeSidebarPanel() {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+        }
+
+        menuBtn.onclick = openSidebar;
+        closeSidebar.onclick = closeSidebarPanel;
+        sidebarOverlay.onclick = closeSidebarPanel;
+
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+            item.onclick = () => {
+                const page = item.dataset.page;
+                document.querySelectorAll('.sidebar-nav .nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                if (page === 'home') {
+                    goBack();
+                    closeSidebarPanel();
+                    return;
+                }
+
+                if (page === 'explore') {
+                    searchQuery = '';
+                    searchInput.value = '';
+                    activeFilter = null;
+                    renderFilterGrid();
+                    updateFilterBadge();
+                    results.classList.add('visible');
+                    backWrap.classList.add('visible');
+                    renderResults();
+                    closeSidebarPanel();
+                    return;
+                }
+
+                if (page === 'notes') {
+                    window.location.href = 'nts.html';
+                    return;
+                }
+
+                if (page === 'chatgpt') {
+                    window.open('https://chat.openai.com', '_blank');
+                    return;
+                }
+
+                if (page === 'deepseek') {
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    if (isMobile) {
+                        window.location.href = 'deepseek://';
+                        setTimeout(() => window.open('https://deepseek.com', '_blank'), 1500);
+                    } else {
+                        window.open('https://deepseek.com', '_blank');
+                    }
+                    return;
+                }
+
+                if (page === 'bookmarks') {
+                    results.classList.add('visible');
+                    backWrap.classList.add('visible');
+
+                    if (!bookmarks.length) {
+                        cardsContainer.innerHTML = `
+                                <div class="empty">
+                                    <i class="fas fa-bookmark"></i>
+                                    <div class="title">${getLocalText('نشانی وجود ندارد', 'No bookmarks', 'لا توجد علامات مرجعية')}</div>
+                                </div>
+                            `;
+                        resultCount.textContent = '۰ نتیجه';
+                    } else {
+                        let html = '';
+                        bookmarks.forEach(expr => {
+                            const borderColor = expr.color || '#2fb557';
+                            html += `
+                                    <div class="card" style="border-right-color: ${borderColor};">
+                                        <div class="top">
+                                            <div>
+                                                <div class="eng">${expr.eng}</div>
+                                                <div class="pron">${expr.pron}</div>
+                                                <div class="fa">${expr.fa}</div>
+                                                ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
+                                                <div class="tags">${expr.tags.map(t => `<span><span>${getTagIcon(t)}</span> ${getTagLabel(t)}</span>`).join('')}</div>
+                                            </div>
+                                            <div class="actions">
+                                                <button class="record-btn" data-eng="${expr.eng}" title="ضبط صدا"><i class="fas fa-microphone"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                        });
+                        cardsContainer.innerHTML = html;
+                        resultCount.textContent = `${bookmarks.length} ${getLocalText('نتیجه', 'result', 'نتيجة')}`;
+
+                        document.querySelectorAll('.record-btn').forEach(btn => {
+                            btn.onclick = () => {
+                                const expr = expressions.find(e => e.eng === btn.dataset.eng);
+                                if (expr) {
+                                    document.querySelectorAll('.card').forEach(c => c.style.opacity = '0.3');
+                                    const parent = btn.closest('.card');
+                                    if (parent) parent.style.opacity = '1';
+                                    btn.classList.add('recording');
+                                    speak(expr.eng);
+                                    setTimeout(() => {
+                                        btn.classList.remove('recording');
+                                        document.querySelectorAll('.card').forEach(c => c.style.opacity = '1');
+                                    }, 1500);
+                                }
+                            };
+                        });
+                    }
+                    closeSidebarPanel();
+                    return;
+                }
+
+                if (page === 'stats') {
+                    const allTags = getAllTags();
+                    results.classList.add('visible');
+                    backWrap.classList.add('visible');
+                    cardsContainer.innerHTML = `
+                            <div style="padding:10px 0;">
+                                <div style="font-size:16px; font-weight:700; color:#2fb557; margin-bottom:12px;">📊 ${getLocalText('آمار', 'Statistics', 'إحصائيات')}</div>
+                                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                        <div style="font-size:20px; font-weight:700; color:#2fb557;">${expressions.length}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('جمله', 'Sentences', 'جمل')}</div>
+                                    </div>
+                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                        <div style="font-size:20px; font-weight:700; color:#2fb557;">${allTags.length}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('تگ', 'Tags', 'علامات')}</div>
+                                    </div>
+                                    <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(47,181,87,0.06); border-radius:10px; padding:10px; text-align:center;">
+                                        <div style="font-size:20px; font-weight:700; color:#2fb557;">${bookmarks.length}</div>
+                                        <div style="font-size:10px; color:rgba(255,255,255,0.3);">${getLocalText('نشان', 'Bookmarks', 'علامات مرجعية')}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    resultCount.textContent = '📊 آمار';
+                    closeSidebarPanel();
+                    return;
+                }
+
+                closeSidebarPanel();
+            };
+        });
+
+        // ============================================================
+        // اطلاعات
+        // ============================================================
+        function updateInfo() {
+            const allTags = getAllTags();
+            info.textContent = `${expressions.length} ${getLocalText('جمله', 'sentences', 'جمل')} • ${allTags.length} ${getLocalText('تگ', 'tags', 'علامات')}`;
+        }
+
+        // ============================================================
+        // میکروفون
+        // ============================================================
+        let recognition = null;
+        let isMicActive = false;
+
+        function initSpeech() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                micText.textContent = 'پشتیبانی نمی‌شود';
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.onstart = () => {
+                micText.textContent = getLocalText('در حال گوش دادن...', 'Listening...', 'جاري الاستماع...');
+                micResult.textContent = '';
+            };
+            recognition.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        micResult.textContent = transcript;
+                        searchInput.value = transcript;
+                        searchQuery = transcript;
+                        applyFilters();
+                        setTimeout(() => { micOverlay.classList.remove('open');
+                            isMicActive = false; }, 500);
+                    }
+                }
+                micResult.textContent = transcript;
+            };
+            recognition.onerror = () => {
+                micText.textContent = getLocalText('خطا', 'Error', 'خطأ');
+                setTimeout(() => { micOverlay.classList.remove('open');
+                    isMicActive = false; }, 800);
+            };
+            recognition.onend = () => {
+                if (micOverlay.classList.contains('open')) {
+                    micOverlay.classList.remove('open');
+                    isMicActive = false;
+                }
+            };
+        }
+
+        function startMic() {
+            if (isMicActive) return;
+            if (!recognition) initSpeech();
+            if (!recognition) { alert('پشتیبانی نمی‌شود'); return; }
+            recognition.lang = currentLang === 'fa' ? 'fa-IR' : 'en-US';
+            micOverlay.classList.add('open');
+            isMicActive = true;
+            micResult.textContent = '';
+            micText.textContent = getLocalText('برای جستجو صحبت کنید...', 'Speak to search...', 'تحدث للبحث...');
+            try { recognition.start(); } catch (e) {}
+        }
+
+        micBtn.onclick = startMic;
+        micClose.onclick = () => {
+            micOverlay.classList.remove('open');
+            isMicActive = false;
+            if (recognition) recognition.stop();
+        };
+
+        // ============================================================
+        // رویدادها
+        // ============================================================
+        searchInput.addEventListener('input', () => {
+            searchQuery = searchInput.value;
+            applyFilters();
+        });
+
+        clearBtn.onclick = () => {
+            searchInput.value = '';
+            searchQuery = '';
+            activeFilter = null;
+            renderFilterGrid();
+            updateFilterBadge();
+            goBack();
+        };
+
+        backBtn.onclick = goBack;
+
+        addBtn.onclick = () => {
+            if (addPanel.classList.contains('open')) {
+                closeAddPanel();
+            } else {
+                openAddPanel();
+            }
+        };
+
+        addCancel.onclick = closeAddPanel;
+        addSubmit.onclick = addPhrase;
+
+        // ============================================================
+        // مقداردهی اولیه
+        // ============================================================
+        loadData();
+        updateLanguage(0);
+        renderFilterGrid();
+        updateFilterBadge();
+
+        if (expressions.length === 0) {
+            results.classList.add('visible');
+            backWrap.classList.add('visible');
+            cardsContainer.innerHTML = `
+                    <div class="empty">
+                        <i class="fas fa-plus-circle"></i>
+                        <div class="title">${getLocalText('هنوز جمله‌ای اضافه نشده', 'No sentences yet', 'لا توجد جمل بعد')}</div>
+                        <div class="desc">${getLocalText('با + اضافه کن ✨', 'Add with + ✨', 'أضف باستخدام + ✨')}</div>
+                    </div>
+                `;
+            resultCount.textContent = '۰ نتیجه';
+        }
+
+        updateInfo();
+        initSpeech();
+
+        console.log('✅ جیب — نسخه نهایی با لاین رنگی و ضبط صدا');
+        console.log(`📚 ${expressions.length} جمله`);
+        console.log(`🏷️ ${getAllTags().length} تگ`);
+        console.log('🌐 تغییر زبان فقط با کلیک روی دکمه');
+    </script>
+</body>
+</html>
