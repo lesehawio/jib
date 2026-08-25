@@ -585,12 +585,22 @@
             gap: 8px;
         }
 
+        /* ===== هر دو زبان انگلیسی و عربی بولد و پررنگ ===== */
         .card .eng {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             direction: ltr;
             text-align: left;
             color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card .ar {
+            font-weight: 700;
+            font-size: 15px;
+            direction: rtl;
+            text-align: right;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 2px;
         }
 
         .card .pron {
@@ -606,12 +616,6 @@
             color: rgba(255, 255, 255, 0.5);
             margin-top: 2px;
             font-weight: 400;
-        }
-
-        .card .ar {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.3);
-            direction: rtl;
         }
 
         .card .tags {
@@ -1424,7 +1428,7 @@
         });
 
         // ============================================================
-        // نتایج با جستجوی پیشرفته
+        // نتایج با جستجوی پیشرفته - انگلیسی و عربی هر دو بولد
         // ============================================================
         function renderResults() {
             let items = [...expressions];
@@ -1469,9 +1473,9 @@
                             <div class="top">
                                 <div>
                                     <div class="eng">${expr.eng}</div>
+                                    ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
                                     <div class="pron">${expr.pron}</div>
                                     <div class="fa">${expr.fa}</div>
-                                    ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
                                     <div class="tags">${expr.tags.map(t => `<span data-tag="${t}"><i class="fas ${getTagIcon(t)}"></i> ${getTagLabel(t)}</span>`).join('')}</div>
                                 </div>
                                 <div class="actions">
@@ -1719,7 +1723,7 @@
                 eng,
                 pron: generatePron(eng),
                 fa,
-                ar,
+                ar: ar || '',
                 tags,
                 color: color
             });
@@ -1815,9 +1819,9 @@
                                         <div class="top">
                                             <div>
                                                 <div class="eng">${expr.eng}</div>
+                                                ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
                                                 <div class="pron">${expr.pron}</div>
                                                 <div class="fa">${expr.fa}</div>
-                                                ${expr.ar ? `<div class="ar">${expr.ar}</div>` : ''}
                                                 <div class="tags">${expr.tags.map(t => `<span><i class="fas ${getTagIcon(t)}"></i> ${getTagLabel(t)}</span>`).join('')}</div>
                                             </div>
                                             <div class="actions">
@@ -2072,10 +2076,10 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — طراحی هنری با آیکون‌های Font Awesome');
+        console.log('✅ جیب — انگلیسی و عربی هر دو بولد و پررنگ');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('🎨 دکمه منوی سبز، بدون ایموجی، حرفه‌ای');
+        console.log('🎨 طراحی هنری با آیکون‌های Font Awesome');
     </script>
 </body>
 </html>
