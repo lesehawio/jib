@@ -50,7 +50,7 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .menu-btn {
@@ -70,6 +70,226 @@
         .menu-btn:hover {
             border-color: #2fb557;
             color: #2fb557;
+        }
+
+        /* ===== LOGO MOTION (آزاد و مستقل) ===== */
+        .logo-motion {
+            position: relative;
+            width: 145px;
+            height: 45px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            --green: #2fb557;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: none;
+            z-index: 2;
+        }
+
+        .logo-jib {
+            animation: jibLogo 10s infinite;
+        }
+
+        .logo-pocket {
+            animation: pocketLogo 10s infinite;
+        }
+
+        @keyframes jibLogo {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            45% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0;
+                transform: scale(1.03);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pocketLogo {
+            0% {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+            50% {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+            55% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            95% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.03);
+            }
+        }
+
+        .blob {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: var(--green);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .blob:nth-child(3) {
+            top: 5px;
+            left: 15px;
+        }
+        .blob:nth-child(4) {
+            top: 25px;
+            left: 40px;
+        }
+        .blob:nth-child(5) {
+            top: 2px;
+            left: 70px;
+        }
+        .blob:nth-child(6) {
+            top: 22px;
+            left: 90px;
+        }
+        .blob:nth-child(7) {
+            top: 8px;
+            right: 30px;
+        }
+        .blob:nth-child(8) {
+            bottom: 3px;
+            right: 10px;
+        }
+        .blob:nth-child(9) {
+            bottom: 4px;
+            left: 5px;
+        }
+
+        .blob {
+            animation: blobAnimation 10s infinite;
+        }
+        .blob:nth-child(4) {
+            animation-delay: .08s;
+        }
+        .blob:nth-child(5) {
+            animation-delay: .16s;
+        }
+        .blob:nth-child(6) {
+            animation-delay: .24s;
+        }
+        .blob:nth-child(7) {
+            animation-delay: .32s;
+        }
+        .blob:nth-child(8) {
+            animation-delay: .40s;
+        }
+        .blob:nth-child(9) {
+            animation-delay: .48s;
+        }
+
+        @keyframes blobAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            43% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            45% {
+                opacity: .9;
+                transform: scale(.5);
+            }
+            47% {
+                opacity: 1;
+                transform: scale(2);
+            }
+            49% {
+                opacity: .8;
+                transform: scale(4);
+            }
+            51% {
+                opacity: 0;
+                transform: scale(7);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        .logo-motion::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--green);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 4;
+            opacity: 0;
+            animation: mainBlob 10s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes mainBlob {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            44% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            46% {
+                opacity: .9;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            48% {
+                opacity: .9;
+                transform: translate(-50%, -50%) scale(3);
+            }
+            50% {
+                opacity: .8;
+                transform: translate(-50%, -50%) scale(8);
+            }
+            52% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(12);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo-motion {
+                width: 120px;
+                height: 38px;
+            }
         }
 
         .header-right {
@@ -580,7 +800,7 @@
         }
 
         /* محو شدن محتویات کارت هنگام ضبط */
-        .card.recording-active .top > div:not(.actions) {
+        .card.recording-active .top>div:not(.actions) {
             opacity: 0.2;
             transition: opacity 0.3s;
         }
@@ -848,10 +1068,23 @@
 </head>
 <body>
 
-    <!-- ===== HEADER (بدون لوگو) ===== -->
+    <!-- ===== HEADER با لوگوی متحرک ===== -->
     <header class="header">
         <div class="header-left">
             <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+
+            <!-- LOGO MOTION — کاملاً مستقل و آزاد -->
+            <div class="logo-motion">
+                <img class="logo logo-jib" src="https://uploadkon.ir/uploads/e52525_26typogrophyjib.png" alt="جیب" />
+                <img class="logo logo-pocket" src="https://uploadkon.ir/uploads/1bd625_26typogrophypocket.png" alt="Pocket" />
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+            </div>
         </div>
         <div class="header-right">
             <button class="lang-btn" id="langBtn">🌐 FA</button>
@@ -987,7 +1220,7 @@
         ];
 
         // ============================================================
-        // متن‌های چندزبانه برای کل سایت
+        // متن‌های چندزبانه
         // ============================================================
         const TRANSLATIONS = {
             'fa': {
@@ -1191,55 +1424,30 @@
             currentLang = lang.lang;
             langBtn.textContent = `🌐 ${lang.label}`;
 
-            // ===== به‌روزرسانی کل متن‌های سایت =====
-
-            // title صفحه
             document.title = t('title');
-
-            // برند سایدبار
             document.getElementById('brandText').textContent = t('brand');
-
-            // placeholder جستجو
             searchInput.placeholder = t('search_placeholder');
 
-            // منوی سایدبار
-            const navLabels = document.querySelectorAll('.sidebar-nav .nav-label');
-            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
-            const navMap = ['home', 'explore', 'notes', 'chatgpt', 'deepseek', 'bookmarks', 'stats'];
-            // فقط آیتم‌هایی که label دارن رو آپدیت کن
             const labelKeys = ['home', 'explore', 'notes', 'bookmarks', 'stats'];
-            navItems.forEach((item, idx) => {
+            document.querySelectorAll('.sidebar-nav .nav-item').forEach((item) => {
                 const page = item.dataset.page;
                 if (labelKeys.includes(page)) {
                     const label = item.querySelector('.nav-label');
                     if (label) label.textContent = t(page);
                 }
-                // ChatGPT و DeepSeek ثابت می‌مانند
             });
 
-            // دکمه برگشت
             document.querySelector('.back-btn').innerHTML = `<i class="fas fa-arrow-right"></i> ${t('home')}`;
-
-            // دکمه‌های افزودن
             document.querySelector('.add-actions .submit').textContent = `➕ ${t('add_with')}`;
             document.querySelector('.add-actions .cancel').textContent = t('home');
-
-            // placeholder های پنل افزودن
             addEng.placeholder = 'English (e.g. I\'m going to the store)';
             addFa.placeholder = t('add_new');
             addAr.placeholder = 'العربية (مثلاً أنا ذاهب إلى المتجر)';
-
-            // برچسب رنگ
             document.querySelector('.color-picker-wrap label').innerHTML = `<i class="fas fa-palette"></i> ${t('tags')}:`;
 
-            // اطلاعات پایین
             updateInfo();
-
-            // رندر مجدد
             renderFilterGrid();
             if (results.classList.contains('visible')) renderResults();
-
-            // میکروفون
             if (micText) micText.textContent = t('speak_to_search');
         }
 
@@ -1292,7 +1500,7 @@
         });
 
         // ============================================================
-        // نتایج
+        // نتایج با جستجوی پیشرفته
         // ============================================================
         function renderResults() {
             let items = [...expressions];
@@ -1300,12 +1508,18 @@
 
             const query = searchQuery.trim().toLowerCase();
             if (query) {
-                items = items.filter(e =>
-                    e.eng.toLowerCase().includes(query) ||
-                    e.fa.includes(query) ||
-                    (e.ar && e.ar.includes(query)) ||
-                    e.tags.some(t => t.includes(query))
-                );
+                items = items.filter(e => {
+                    const textMatch = e.eng.toLowerCase().includes(query) ||
+                        e.fa.includes(query) ||
+                        (e.ar && e.ar.includes(query));
+
+                    const tagMatch = e.tags.some(tagId => {
+                        const tagLabel = getTagLabel(tagId).toLowerCase();
+                        return tagLabel.includes(query) || tagId.includes(query);
+                    });
+
+                    return textMatch || tagMatch;
+                });
             }
 
             const resultWord = items.length === 1 ? t('result') : t('results');
@@ -1348,7 +1562,7 @@
 
             cardsContainer.innerHTML = html;
 
-            // ===== دکمه ضبط سه‌حالته =====
+            // دکمه ضبط سه‌حالته
             document.querySelectorAll('.record-btn').forEach(btn => {
                 let state = 'idle';
                 let mediaRecorder = null;
@@ -1934,10 +2148,11 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — نسخه نهایی با ترجمه کامل کل سایت');
+        console.log('✅ جیب — با لوگوی متحرک کاملاً مستقل');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('🌐 زبان کل سایت با یک دکمه تغییر می‌کند');
+        console.log('🔍 جستجوی پیشرفته در متن و تگ‌ها');
+        console.log('🎨 لوگوی متحرک آزاد و مستقل از هر المان');
     </script>
 </body>
 </html>
