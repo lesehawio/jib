@@ -585,7 +585,6 @@
             gap: 8px;
         }
 
-        /* ===== هر دو زبان انگلیسی و عربی بولد و پررنگ ===== */
         .card .eng {
             font-weight: 700;
             font-size: 15px;
@@ -686,6 +685,11 @@
         .card .actions .delete-btn:hover {
             border-color: rgba(239, 68, 68, 0.2);
             color: #ef4444;
+        }
+
+        .card .actions .edit-btn:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
         }
 
         /* ===== دکمه ضبط ===== */
@@ -1067,6 +1071,26 @@
             </div>
         </div>
 
+        <!-- ===== پنل ویرایش (مخفی) ===== -->
+        <div class="add-panel" id="editPanel" style="border-right-color: #3b82f6;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:13px; color:#3b82f6; font-weight:600;"><i class="fas fa-edit"></i> ویرایش کارت</span>
+                <button id="editCancel" style="background:transparent; border:none; color:rgba(255,255,255,0.2); cursor:pointer; font-size:14px;"><i class="fas fa-times"></i></button>
+            </div>
+            <input id="editEng" placeholder="English" />
+            <input id="editFa" placeholder="فارسی" />
+            <input id="editAr" placeholder="العربية" />
+            <div class="color-picker-wrap">
+                <label for="editColor"><i class="fas fa-palette"></i> رنگ لاین</label>
+                <input type="color" id="editColor" value="#2fb557" />
+            </div>
+            <div class="tags-wrap" id="editTagsWrap"></div>
+            <div class="add-actions">
+                <button class="submit" id="editSubmit" style="background:#3b82f6;"><i class="fas fa-save"></i> ذخیره</button>
+                <button class="cancel" id="editCancel2">لغو</button>
+            </div>
+        </div>
+
         <!-- برگشت -->
         <div class="back-wrap" id="backWrap">
             <button class="back-btn" id="backBtn"><i class="fas fa-arrow-right"></i> برگشت</button>
@@ -1112,9 +1136,10 @@
         let currentLang = 'fa';
         let activeFilter = null;
         let searchQuery = '';
+        let editingIndex = -1;
 
         // ============================================================
-        // لیست تگ‌ها (بدون ایموجی، فقط آیکون Font Awesome)
+        // لیست تگ‌ها
         // ============================================================
         const TAGS = [
             { id: 'greeting', icon: 'fa-hand-peace', fa: 'احوالپرسی', en: 'Greeting', ar: 'تحية' },
@@ -1326,6 +1351,17 @@
         const addCancel = document.getElementById('addCancel');
         const cardColor = document.getElementById('cardColor');
 
+        // ویرایش
+        const editPanel = document.getElementById('editPanel');
+        const editEng = document.getElementById('editEng');
+        const editFa = document.getElementById('editFa');
+        const editAr = document.getElementById('editAr');
+        const editColor = document.getElementById('editColor');
+        const editTagsWrap = document.getElementById('editTagsWrap');
+        const editSubmit = document.getElementById('editSubmit');
+        const editCancel = document.getElementById('editCancel');
+        const editCancel2 = document.getElementById('editCancel2');
+
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const menuBtn = document.getElementById('menuBtn');
@@ -1428,7 +1464,88 @@
         });
 
         // ============================================================
-        // نتایج با جستجوی پیشرفته - انگلیسی و عربی هر دو بولد
+        // باز و بسته کردن پنل ویرایش
+        // ============================================================
+        function openEditPanel(index) {
+            const expr = expressions[index];
+            if (!expr) return;
+            editingIndex = index;
+            editEng.value = expr.eng;
+            editFa.value = expr.fa;
+            editAr.value = expr.ar || '';
+            editColor.value = expr.color || '#2fb557';
+            editPanel.style.borderRightColor = editColor.value;
+            renderEditTags(expr.tags);
+            editPanel.classList.add('open');
+            addPanel.classList.remove('open');
+            // اسکرول به پنل ویرایش
+            editPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function closeEditPanel() {
+            editPanel.classList.remove('open');
+            editingIndex = -1;
+            editEng.value = '';
+            editFa.value = '';
+            editAr.value = '';
+            editColor.value = '#2fb557';
+        }
+
+        function renderEditTags(selectedTags) {
+            const allTags = getAllTags();
+            editTagsWrap.innerHTML = `<span style="font-size:10px; color:rgba(255,255,255,0.12);">${t('tags')}</span>`;
+            allTags.forEach(tag => {
+                const chip = document.createElement('span');
+                chip.className = 'tag-chip';
+                chip.dataset.tag = tag;
+                if (selectedTags && selectedTags.includes(tag)) chip.classList.add('active');
+                chip.innerHTML = `<i class="fas ${getTagIcon(tag)}"></i> ${getTagLabel(tag)}`;
+                chip.onclick = () => chip.classList.toggle('active');
+                editTagsWrap.appendChild(chip);
+            });
+        }
+
+        function saveEdit() {
+            if (editingIndex === -1) return;
+            const eng = editEng.value.trim();
+            const fa = editFa.value.trim();
+            const ar = editAr.value.trim();
+            const color = editColor.value;
+
+            if (!eng || !fa) {
+                alert(t('eng_required'));
+                return;
+            }
+
+            const tags = [];
+            document.querySelectorAll('#editTagsWrap .tag-chip.active').forEach(chip => {
+                tags.push(chip.dataset.tag);
+            });
+
+            if (!tags.length) {
+                alert(t('tag_required'));
+                return;
+            }
+
+            expressions[editingIndex] = {
+                ...expressions[editingIndex],
+                eng,
+                pron: generatePron(eng),
+                fa,
+                ar: ar || '',
+                tags,
+                color
+            };
+
+            saveData();
+            closeEditPanel();
+            applyFilters();
+            renderFilterGrid();
+            updateInfo();
+        }
+
+        // ============================================================
+        // نتایج با جستجوی پیشرفته
         // ============================================================
         function renderResults() {
             let items = [...expressions];
@@ -1465,11 +1582,12 @@
             }
 
             let html = '';
-            items.forEach(expr => {
+            items.forEach((expr, idx) => {
                 const saved = bookmarks.some(b => b.eng === expr.eng);
                 const borderColor = expr.color || '#2fb557';
+                const realIndex = expressions.indexOf(expr);
                 html += `
-                        <div class="card" data-eng="${expr.eng}" style="border-right-color: ${borderColor};">
+                        <div class="card" data-eng="${expr.eng}" data-index="${realIndex}" style="border-right-color: ${borderColor};">
                             <div class="top">
                                 <div>
                                     <div class="eng">${expr.eng}</div>
@@ -1481,6 +1599,7 @@
                                 <div class="actions">
                                     <button class="record-btn" data-eng="${expr.eng}" title="${t('mic_not_supported')}"><i class="fas fa-microphone"></i></button>
                                     <button class="bookmark-btn ${saved ? 'saved' : ''}" data-eng="${expr.eng}"><i class="fas fa-bookmark"></i></button>
+                                    <button class="edit-btn" data-index="${realIndex}" title="ویرایش"><i class="fas fa-pen"></i></button>
                                     <button class="delete-btn" data-eng="${expr.eng}"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
@@ -1586,6 +1705,17 @@
                 };
             });
 
+            // ویرایش
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(btn.dataset.index);
+                    if (!isNaN(index)) {
+                        openEditPanel(index);
+                    }
+                };
+            });
+
             // حذف
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.onclick = (e) => {
@@ -1655,6 +1785,7 @@
                 backWrap.classList.remove('visible');
             }
             closeAddPanel();
+            closeEditPanel();
             updateInfo();
         }
 
@@ -1663,6 +1794,7 @@
         // ============================================================
         function openAddPanel() {
             addPanel.classList.add('open');
+            closeEditPanel();
             cardColor.value = '#2fb557';
             addPanel.style.borderRightColor = '#2fb557';
             renderAddTags();
@@ -2052,6 +2184,11 @@
         addCancel.onclick = closeAddPanel;
         addSubmit.onclick = addPhrase;
 
+        // رویدادهای ویرایش
+        editCancel.onclick = closeEditPanel;
+        editCancel2.onclick = closeEditPanel;
+        editSubmit.onclick = saveEdit;
+
         // ============================================================
         // مقداردهی اولیه
         // ============================================================
@@ -2076,10 +2213,10 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — انگلیسی و عربی هر دو بولد و پررنگ');
+        console.log('✅ جیب — با دکمه ویرایش کارت‌ها');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('🎨 طراحی هنری با آیکون‌های Font Awesome');
+        console.log('✏️ آیکن‌ها: ضبط | نشان | ویرایش | حذف');
     </script>
 </body>
 </html>
