@@ -536,6 +536,14 @@
             color: #fff;
         }
 
+        /* ===== پنل ویرایش ===== */
+        .add-panel.edit-panel {
+            border-right-color: #3b82f6;
+        }
+        .add-panel.edit-panel .submit {
+            background: #3b82f6;
+        }
+
         /* ===== نتایج ===== */
         .results {
             width: 100%;
@@ -965,6 +973,113 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
+        /* ===== پرینت JSON ===== */
+        .json-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(16px);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .json-print-overlay.open {
+            display: flex;
+        }
+
+        .json-print-box {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(47, 181, 87, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .json-print-box .json-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .json-print-box .json-header h3 {
+            font-size: 16px;
+            color: #2fb557;
+            font-weight: 700;
+        }
+
+        .json-print-box .json-header .close-json {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .json-print-box .json-header .close-json:hover {
+            color: #fff;
+        }
+
+        .json-print-box pre {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            white-space: pre-wrap;
+            word-break: break-all;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .json-print-box .json-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+
+        .json-print-box .json-actions button {
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .json-print-box .json-actions .copy-json {
+            background: rgba(47, 181, 87, 0.15);
+            color: #2fb557;
+            border: 1px solid rgba(47, 181, 87, 0.1);
+        }
+        .json-print-box .json-actions .copy-json:hover {
+            background: rgba(47, 181, 87, 0.25);
+        }
+
+        .json-print-box .json-actions .download-json {
+            background: #2fb557;
+            color: #fff;
+        }
+        .json-print-box .json-actions .download-json:hover {
+            opacity: 0.85;
+        }
+
         @media (max-width: 600px) {
             .search-box input {
                 font-size: 13px;
@@ -988,6 +1103,13 @@
             }
             .sidebar {
                 width: 260px;
+            }
+            .json-print-box {
+                padding: 16px;
+                max-height: 90vh;
+            }
+            .json-print-box pre {
+                font-size: 10px;
             }
         }
     </style>
@@ -1021,6 +1143,23 @@
         <div class="icon"><i class="fas fa-microphone"></i></div>
         <div class="text" id="micText">برای جستجو صحبت کنید...</div>
         <div class="result" id="micResult"></div>
+    </div>
+
+    <!-- ===== JSON پرینت ===== -->
+    <div class="json-print-overlay" id="jsonOverlay">
+        <div class="json-print-box">
+            <div class="json-header">
+                <h3><i class="fas fa-code"></i> JSON Export</h3>
+                <button class="close-json" id="closeJson"><i class="fas fa-times"></i></button>
+            </div>
+            <pre id="jsonContent">{
+  "expressions": []
+}</pre>
+            <div class="json-actions">
+                <button class="copy-json" id="copyJson"><i class="fas fa-copy"></i> کپی</button>
+                <button class="download-json" id="downloadJson"><i class="fas fa-download"></i> دانلود</button>
+            </div>
+        </div>
     </div>
 
     <!-- ===== محتوای اصلی ===== -->
@@ -1071,8 +1210,8 @@
             </div>
         </div>
 
-        <!-- ===== پنل ویرایش (مخفی) ===== -->
-        <div class="add-panel" id="editPanel" style="border-right-color: #3b82f6;">
+        <!-- ===== پنل ویرایش ===== -->
+        <div class="add-panel edit-panel" id="editPanel">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                 <span style="font-size:13px; color:#3b82f6; font-weight:600;"><i class="fas fa-edit"></i> ویرایش کارت</span>
                 <button id="editCancel" style="background:transparent; border:none; color:rgba(255,255,255,0.2); cursor:pointer; font-size:14px;"><i class="fas fa-times"></i></button>
@@ -1086,7 +1225,7 @@
             </div>
             <div class="tags-wrap" id="editTagsWrap"></div>
             <div class="add-actions">
-                <button class="submit" id="editSubmit" style="background:#3b82f6;"><i class="fas fa-save"></i> ذخیره</button>
+                <button class="submit" id="editSubmit"><i class="fas fa-save"></i> ذخیره</button>
                 <button class="cancel" id="editCancel2">لغو</button>
             </div>
         </div>
@@ -1326,6 +1465,79 @@
         }
 
         // ============================================================
+        // JSON پرینت
+        // ============================================================
+        function showJsonPrint() {
+            const jsonData = expressions.map(expr => ({
+                english: expr.eng,
+                persian: expr.fa,
+                arabic: expr.ar || '',
+                pronunciation: expr.pron,
+                tags: expr.tags.map(t => getTagLabel(t)),
+                color: expr.color || '#2fb557'
+            }));
+
+            const jsonStr = JSON.stringify(jsonData, null, 2);
+            document.getElementById('jsonContent').textContent = jsonStr;
+            document.getElementById('jsonOverlay').classList.add('open');
+        }
+
+        function closeJsonPrint() {
+            document.getElementById('jsonOverlay').classList.remove('open');
+        }
+
+        function copyJson() {
+            const content = document.getElementById('jsonContent').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                const btn = document.getElementById('copyJson');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            }).catch(() => {
+                // fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = content;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const btn = document.getElementById('copyJson');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            });
+        }
+
+        function downloadJson() {
+            const jsonData = expressions.map(expr => ({
+                english: expr.eng,
+                persian: expr.fa,
+                arabic: expr.ar || '',
+                pronunciation: expr.pron,
+                tags: expr.tags.map(t => getTagLabel(t)),
+                color: expr.color || '#2fb557'
+            }));
+
+            const jsonStr = JSON.stringify(jsonData, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `jib_export_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('closeJson').onclick = closeJsonPrint;
+        document.getElementById('copyJson').onclick = copyJson;
+        document.getElementById('downloadJson').onclick = downloadJson;
+        document.getElementById('jsonOverlay').onclick = (e) => {
+            if (e.target === e.currentTarget) closeJsonPrint();
+        };
+
+        // ============================================================
         // DOM
         // ============================================================
         const searchInput = document.getElementById('searchInput');
@@ -1351,7 +1563,6 @@
         const addCancel = document.getElementById('addCancel');
         const cardColor = document.getElementById('cardColor');
 
-        // ویرایش
         const editPanel = document.getElementById('editPanel');
         const editEng = document.getElementById('editEng');
         const editFa = document.getElementById('editFa');
@@ -1464,7 +1675,7 @@
         });
 
         // ============================================================
-        // باز و بسته کردن پنل ویرایش
+        // ویرایش
         // ============================================================
         function openEditPanel(index) {
             const expr = expressions[index];
@@ -1478,7 +1689,6 @@
             renderEditTags(expr.tags);
             editPanel.classList.add('open');
             addPanel.classList.remove('open');
-            // اسکرول به پنل ویرایش
             editPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
@@ -1545,7 +1755,7 @@
         }
 
         // ============================================================
-        // نتایج با جستجوی پیشرفته
+        // نتایج
         // ============================================================
         function renderResults() {
             let items = [...expressions];
@@ -1609,7 +1819,7 @@
 
             cardsContainer.innerHTML = html;
 
-            // دکمه ضبط سه‌حالته
+            // ضبط
             document.querySelectorAll('.record-btn').forEach(btn => {
                 let state = 'idle';
                 let mediaRecorder = null;
@@ -1790,7 +2000,7 @@
         }
 
         // ============================================================
-        // افزودن جمله
+        // افزودن
         // ============================================================
         function openAddPanel() {
             addPanel.classList.add('open');
@@ -2184,7 +2394,6 @@
         addCancel.onclick = closeAddPanel;
         addSubmit.onclick = addPhrase;
 
-        // رویدادهای ویرایش
         editCancel.onclick = closeEditPanel;
         editCancel2.onclick = closeEditPanel;
         editSubmit.onclick = saveEdit;
@@ -2213,10 +2422,27 @@
         updateInfo();
         initSpeech();
 
-        console.log('✅ جیب — با دکمه ویرایش کارت‌ها');
+        console.log('✅ جیب — با JSON پرینت در بخش اکسپلور');
         console.log(`📚 ${expressions.length} جمله`);
         console.log(`🏷️ ${getAllTags().length} تگ`);
-        console.log('✏️ آیکن‌ها: ضبط | نشان | ویرایش | حذف');
+        console.log('🖨️ دکمه پرینت JSON در منوی همبرگری');
+
+        // ===== اضافه کردن دکمه پرینت JSON به سایدبار =====
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const divider = sidebarNav.querySelector('.divider');
+        const printBtn = document.createElement('button');
+        printBtn.className = 'nav-item';
+        printBtn.setAttribute('data-page', 'print');
+        printBtn.innerHTML = `<i class="fas fa-print"></i> <span class="nav-label">پرینت JSON</span>`;
+        printBtn.onclick = () => {
+            if (expressions.length === 0) {
+                alert('هیچ جمله‌ای برای پرینت وجود ندارد!');
+                return;
+            }
+            showJsonPrint();
+            closeSidebarPanel();
+        };
+        sidebarNav.insertBefore(printBtn, divider);
     </script>
 </body>
 </html>
