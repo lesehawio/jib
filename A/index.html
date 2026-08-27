@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Chunk lite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --card: rgba(255, 255, 255, 0.05);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #eeeaff;
+            --text2: #9484b8;
+            --text3: #6a5a8a;
+            --accent: #8a6eff;
+            --accent2: #6c4fc7;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --radius: 16px;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: -apple-system, 'Inter', system-ui, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 20% 30%, rgba(138, 110, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(108, 79, 199, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        /* ===== LOGO ===== */
+        .logo {
+            margin-bottom: 40px;
+        }
+        .logo img {
+            height: 56px;
+            width: auto;
+            filter: drop-shadow(0 0 40px rgba(138, 110, 255, 0.15));
+        }
+        .logo .sub {
+            font-size: 0.65rem;
+            color: var(--text3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+            opacity: 0.7;
+        }
+
+        /* ===== TITLE ===== */
+        .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .desc {
+            font-size: 0.7rem;
+            color: var(--text2);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: var(--radius);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(138, 110, 255, 0.3);
+        }
+        .btn:hover::before {
+            opacity: 0.08;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .btn .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            background: rgba(138, 110, 255, 0.12);
+            flex-shrink: 0;
+        }
+        .btn .btn-info {
+            text-align: right;
+        }
+        .btn .btn-info .label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .btn .btn-info .badge {
+            font-size: 0.55rem;
+            color: var(--text3);
+            margin-top: 2px;
+            display: block;
+        }
+
+        .btn .btn-arrow {
+            font-size: 0.9rem;
+            color: var(--text3);
+            transition: 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .btn:hover .btn-arrow {
+            color: var(--accent);
+            transform: translateX(-4px);
+        }
+
+        /* ===== VERSION ===== */
+        .version {
+            margin-top: 30px;
+            font-size: 0.5rem;
+            color: var(--text3);
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .container { max-width: 100%; padding: 0 4px; }
+            .logo img { height: 44px; }
+            .logo .sub { font-size: 0.55rem; }
+            .title { font-size: 0.95rem; }
+            .desc { font-size: 0.6rem; }
+            .btn { padding: 14px 16px; }
+            .btn .btn-icon { width: 34px; height: 34px; font-size: 0.9rem; }
+            .btn .btn-info .label { font-size: 0.7rem; }
+            .btn .btn-info .badge { font-size: 0.5rem; }
+        }
+
+        @media (max-width: 360px) {
+            .btn { padding: 12px 14px; }
+            .btn .btn-icon { width: 28px; height: 28px; font-size: 0.75rem; }
+            .btn .btn-info .label { font-size: 0.6rem; }
+            .btn .btn-info .badge { font-size: 0.45rem; }
+            .logo img { height: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== LOGO ===== -->
+        <div class="logo">
+            <img src="https://uploadkon.ir/uploads/5a9b23_26file-00000000ec0c71f48c35ec17ac138f5c.png" alt="Chunk lite">
+            <div class="sub">Reach Your Best for English</div>
+        </div>
+
+        <!-- ===== TITLE ===== -->
+        <div class="title">انتخاب زبان</div>
+        <div class="desc">زبان مورد نظر خود را انتخاب کنید و شروع به یادگیری کنید</div>
+
+        <!-- ===== BUTTONS ===== -->
+        <div class="btn-group">
+
+            <!-- دکمه اول → 01.html (انگلیسی) -->
+            <a href="01.html" class="btn">
+                <div class="btn-left">
+                    <div class="btn-icon">🇬🇧</div>
+                    <div class="btn-info">
+                        <span class="label">انگلیسی</span>
+                        <span class="badge">English · Chunks &amp; Core</span>
+                    </div>
+                </div>
+                <span class="btn-arrow">←</span>
+            </a>
+
+            <!-- دکمه دوم → 02.html (عربی عراقی) -->
+            <a href="02.html" class="btn">
+                <div class="btn-left">
+                    <div class="btn-icon">🇮🇶</div>
+                    <div class="btn-info">
+                        <span class="label">عربی عراقی</span>
+                        <span class="badge">اللهجة العراقية · جُمل و قوالب</span>
+                    </div>
+                </div>
+                <span class="btn-arrow">←</span>
+            </a>
+
+        </div>
+
+        <!-- ===== VERSION ===== -->
+        <div class="version">Chunk lite · v2.0</div>
+
+    </div>
+
+</body>
+</html>
