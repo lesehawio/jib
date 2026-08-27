@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Chunk lite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --card: rgba(255,255,255,0.04);
+            --card2: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.07);
+            --text: #eeeaff;
+            --text2: #9484b8;
+            --text3: #6a5a8a;
+            --accent: #8a6eff;
+            --accent2: #6c4fc7;
+            --done: #00c853;
+            --done-bg: rgba(0,200,83,0.12);
+            --shadow: 0 4px 16px rgba(0,0,0,0.4);
+            --radius: 14px;
+            --radius-sm: 10px;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: -apple-system, 'Inter', system-ui, sans-serif;
+            color: var(--text);
+            padding: 16px 14px 24px;
+            min-height: 100vh;
+            background-image: radial-gradient(ellipse at 20% 50%, rgba(138,110,255,0.05) 0%, transparent 60%);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .logo-area { display: flex; flex-direction: column; }
+        .logo-area img { height: 40px; width: auto; }
+        .logo-area .sub { font-size: 0.55rem; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+        .header-badge {
+            background: var(--card2);
+            border: 0.5px solid var(--border);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            color: var(--text2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+        .core-desc {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            font-size: 0.65rem;
+            color: var(--text2);
+            line-height: 1.8;
+            box-shadow: var(--shadow);
+        }
+        .core-desc strong { color: var(--text); }
+        .core-desc .highlight { color: var(--accent); font-family: 'SF Mono', monospace; font-size: 0.6rem; }
+        .core-desc .sep { color: var(--text3); margin: 0 4px; }
+
+        /* ===== MAIN TABS ===== */
+        .tabs-wrap {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 6px 8px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .main-tab {
+            background: transparent;
+            border: 0.5px solid var(--border);
+            padding: 5px 16px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text2);
+            transition: 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .main-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .main-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .main-tab.core-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* ===== SUB TABS (برای Chunks) ===== */
+        .sub-tabs-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .sub-tab {
+            background: transparent;
+            border: 0.5px solid var(--border);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text3);
+            transition: 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .sub-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .sub-tab.active { background: var(--card2); color: var(--text); border-color: var(--accent); }
+
+        .benefit {
+            font-size: 0.65rem;
+            color: var(--accent);
+            padding: 3px 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 0.5px solid var(--border);
+        }
+
+        .phrase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 7px;
+        }
+
+        .phrase-item, .core-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 0.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            min-height: 95px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+            gap: 3px;
+        }
+        .phrase-item:hover, .core-item:hover {
+            border-color: rgba(138,110,255,0.2);
+            transform: translateY(-1px);
+        }
+        .phrase-item.recording-active, .core-item.recording-active {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 30px rgba(255,107,107,0.08);
+        }
+        .phrase-item.done, .core-item.done {
+            border-color: var(--done);
+            background: var(--done-bg);
+        }
+        .phrase-item.done .phrase-num, .core-item.done .core-num {
+            color: var(--done);
+            opacity: 1;
+        }
+
+        .phrase-num, .core-num {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--text3);
+            opacity: 0.4;
+            position: absolute;
+            top: 5px;
+            right: 8px;
+        }
+
+        .phrase-eng, .core-pattern {
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'SF Mono', 'JetBrains Mono', monospace;
+            color: var(--text);
+            line-height: 1.3;
+            word-break: break-word;
+            direction: ltr;
+        }
+        .core-pattern { color: var(--accent); }
+
+        .phrase-fa {
+            font-size: 0.6rem;
+            color: var(--text2);
+            margin-top: 1px;
+        }
+
+        .core-category {
+            font-size: 0.45rem;
+            color: var(--text3);
+            background: var(--card2);
+            padding: 1px 8px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .core-formula {
+            font-size: 0.5rem;
+            color: var(--text3);
+            font-family: 'SF Mono', monospace;
+            background: rgba(255,255,255,0.03);
+            padding: 1px 8px;
+            border-radius: 6px;
+            border: 0.5px solid var(--border);
+            margin-bottom: 2px;
+        }
+
+        .core-examples {
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: 4px;
+            padding-top: 4px;
+            border-top: 0.5px solid var(--border);
+            width: 100%;
+        }
+        .core-examples.open { display: flex; }
+        .core-examples .example {
+            font-size: 0.6rem;
+            color: var(--text2);
+            direction: ltr;
+            text-align: left;
+            padding: 2px 6px;
+            background: var(--card);
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+        }
+        .core-examples .example .arrow { color: var(--text3); font-size: 0.5rem; margin-left: 4px; }
+
+        .phrase-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            color: var(--text2);
+        }
+        .icon-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .icon-btn:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+        .icon-btn.speaking { color: #fcc419; animation: pulse-icon 0.5s infinite; }
+        .icon-btn.recording { color: #ff6b6b; animation: pulse-icon 0.6s infinite; }
+        .icon-btn.recorded { color: #69db7c; }
+        .icon-btn.playing { color: #fcc419; }
+        .icon-btn.done-btn { color: var(--text3); }
+        .icon-btn.done-btn:hover { color: var(--done); background: rgba(0,200,83,0.1); }
+        .icon-btn.done-btn.is-done { color: var(--done); }
+        .icon-btn.done-btn.is-done svg { stroke: var(--done); fill: var(--done); }
+        .icon-btn.expand-btn { color: var(--text3); }
+        .icon-btn.expand-btn:hover { color: var(--text); }
+        .icon-btn.expand-btn.open { transform: rotate(180deg); }
+
+        @keyframes pulse-icon {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.9); }
+        }
+
+        .phrase-audio { display: none; }
+
+        .blur-chunks .phrase-eng,
+        .blur-chunks .phrase-fa,
+        .blur-chunks .core-pattern,
+        .blur-chunks .example {
+            filter: blur(4px);
+            user-select: none;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 12px 10px 18px; }
+            .logo-area img { height: 32px; }
+            .logo-area .sub { font-size: 0.45rem; }
+            .header-badge { font-size: 0.5rem; padding: 3px 10px; }
+            .main-tab { font-size: 0.5rem; padding: 4px 12px; }
+            .sub-tab { font-size: 0.45rem; padding: 2px 8px; }
+            .phrase-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 5px; }
+            .phrase-item, .core-item { min-height: 80px; padding: 10px 6px; }
+            .phrase-eng, .core-pattern { font-size: 0.75rem; }
+            .phrase-fa { font-size: 0.5rem; }
+            .icon-btn { width: 24px; height: 24px; }
+            .icon-btn svg { width: 13px; height: 13px; }
+            .core-examples .example { font-size: 0.5rem; }
+            .core-desc { font-size: 0.55rem; padding: 8px 12px; }
+            .core-category { font-size: 0.4rem; }
+            .core-formula { font-size: 0.45rem; }
+        }
+
+        @media (max-width: 450px) {
+            body { padding: 10px 8px 14px; }
+            .logo-area img { height: 26px; }
+            .header-badge { font-size: 0.45rem; padding: 2px 8px; }
+            .main-tab { font-size: 0.45rem; padding: 3px 10px; border-radius: 8px; }
+            .sub-tab { font-size: 0.4rem; padding: 2px 6px; border-radius: 8px; }
+            .phrase-grid { grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 4px; }
+            .phrase-item, .core-item { min-height: 68px; padding: 8px 4px; border-radius: 8px; }
+            .phrase-eng, .core-pattern { font-size: 0.65rem; }
+            .phrase-fa { display: none; }
+            .icon-btn { width: 20px; height: 20px; }
+            .icon-btn svg { width: 11px; height: 11px; }
+            .core-examples .example { font-size: 0.45rem; padding: 1px 4px; }
+            .core-desc { font-size: 0.5rem; padding: 6px 10px; }
+            .tabs-wrap { padding: 4px 6px; gap: 2px; }
+            .core-category { font-size: 0.35rem; padding: 1px 5px; }
+            .core-formula { font-size: 0.4rem; padding: 1px 5px; }
+        }
+
+        @media (max-width: 360px) {
+            .phrase-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 3px; }
+            .phrase-item, .core-item { min-height: 56px; padding: 6px 3px; }
+            .phrase-eng, .core-pattern { font-size: 0.55rem; }
+            .icon-btn { width: 18px; height: 18px; }
+            .icon-btn svg { width: 10px; height: 10px; }
+            .main-tab { font-size: 0.4rem; padding: 2px 8px; }
+            .sub-tab { font-size: 0.35rem; padding: 1px 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <div class="logo-area">
+        <img src="https://uploadkon.ir/uploads/5a9b23_26file-00000000ec0c71f48c35ec17ac138f5c.png" alt="Chunk lite">
+        <div class="sub">Reach Your Best for English</div>
+    </div>
+    <div class="header-badge">
+        <span class="dot"></span>
+        English Core
+    </div>
+</div>
+
+<!-- ===== CORE DESCRIPTION ===== -->
+<div class="core-desc" id="coreDesc">
+    <strong>English Core</strong> — الگوهای مولد برای ساخت صدها جمله.
+    <span class="sep">|</span>
+    <span class="highlight">I feel like + VERB-ing</span> →
+    <span class="highlight">I feel like sleeping.</span>
+    <span class="sep">·</span>
+    <span class="highlight">I feel like going out.</span>
+    <span class="sep">·</span>
+    <span class="highlight">I feel like something's wrong.</span>
+    <br>
+    <span style="color: var(--text3); font-size: 0.55rem;">روی هر الگو کلیک کن تا جملات نمونه را ببینی.</span>
+</div>
+
+<!-- ===== MAIN TABS ===== -->
+<div class="tabs-wrap" id="mainTabs"></div>
+
+<!-- ===== MAIN ===== -->
+<div class="main" id="phrasesContainer"></div>
+
+<script>
+    // ======================= CHUNKS DATA =======================
+    const stepsData = [
+        { name: "Filters", benefit: "پرکننده‌های طبیعی", phrases: [
+            "Well...", "You know", "Like", "I mean", "So", "Actually",
+            "Basically", "Right", "Okay", "Umm", "You see", "Let's see",
+            "You know what I mean", "Believe me", "Anyway", "By the way",
+            "In fact", "Or something", "And stuff", "That kind of thing", "The thing is"
+        ]},
+        { name: "Reactions", benefit: "واکنش‌های سریع", phrases: [
+            "No way!", "Really?", "Damn!", "Oh wow!", "You're kidding!",
+            "Seriously?", "For real?", "Get out of here!", "That's insane!",
+            "Are you serious?", "No kidding", "That's wild", "Oh my God!", "Unbelievable!"
+        ]},
+        { name: "Softeners", benefit: "نرم‌کننده‌ها", phrases: [
+            "Kinda", "Maybe", "I guess", "Probably", "Sort of", "I think",
+            "I suppose", "It seems", "Apparently", "I'm not sure", "It could be",
+            "Perhaps", "Not necessarily", "In a way", "If you ask me", "I'd say", "I assume"
+        ]},
+        { name: "Questions", benefit: "سوال پرسیدن", phrases: [
+            "What do you mean?", "How come?", "What's up?",
+            "What are you getting at?", "What's the catch?", "Since when?",
+            "What's that supposed to mean?", "You think so?", "Why's that?",
+            "How so?", "Like what?", "Says who?", "Who knows?",
+            "Where were we?", "What were you saying?"
+        ]},
+        { name: "Starters", benefit: "شروع‌کننده‌ها", phrases: [
+            "So, let's start", "First of all", "To begin with",
+            "Alright, so", "Let's get started", "I'll tell you what",
+            "You know what?", "Here's the thing", "Let me tell you",
+            "What I'm trying to say is"
+        ]},
+        { name: "Endings", benefit: "پایان مکالمه", phrases: [
+            "Anyway...", "I gotta go", "Catch you later", "Take care",
+            "It was nice talking", "Let's catch up soon", "Talk later",
+            "Take it easy", "I'm off", "I'd better let you go",
+            "Let's leave it there", "Until next time", "I'll be in touch",
+            "Enjoy the rest of your day"
+        ]},
+        { name: "Connectors", benefit: "ربط‌دهنده‌ها", phrases: [
+            "But", "So", "Actually", "Anyway", "However", "Moreover",
+            "Furthermore", "On the other hand", "In addition", "As a result",
+            "Because", "Since", "Therefore", "Meanwhile"
+        ]},
+        { name: "Deep Emotions", benefit: "احساسات عمیق", phrases: [
+            "I'm devastated", "I'm over the moon", "I'm crushed",
+            "I'm thrilled", "I'm so embarrassed", "I'm speechless",
+            "I'm so relieved", "Thank God", "What a shame",
+            "I'm sick of this", "I'm done", "I've had it", "That hit me hard"
+        ]},
+        { name: "Everyday Responses", benefit: "پاسخ‌های روزمره", phrases: [
+            "Sure", "No problem", "Got it", "My bad", "No worries",
+            "I see", "I got you", "Fair enough", "That works",
+            "Sounds good", "Deal", "I'm in", "Count me in"
+        ]},
+        { name: "Clarification", benefit: "درخواست توضیح", phrases: [
+            "What do you mean?", "Sorry?", "Could you repeat that?",
+            "I don't follow", "What are you saying?", "Can you explain?",
+            "What does that mean?", "I'm lost", "Come again?",
+            "Are you saying that...?"
+        ]},
+        { name: "Agreement", benefit: "موافقت و مخالفت", phrases: [
+            "Exactly!", "No way", "I disagree", "Totally", "Absolutely",
+            "Not at all", "I'm with you", "I don't think so",
+            "That's not true", "You've got a point", "I see what you mean"
+        ]},
+        { name: "Hesitation", benefit: "مکث و تردید", phrases: [
+            "Um...", "Well...", "Let me see...", "Hmm", "You know...",
+            "I mean...", "Actually...", "So...", "Like...", "I guess...", "Maybe..."
+        ]},
+        { name: "Correction", benefit: "اصلاح و تغییر موضوع", phrases: [
+            "Actually...", "By the way", "Come to think of it",
+            "Speaking of which", "That reminds me", "On a different note",
+            "Anyway...", "Not to change the subject, but...",
+            "Let's get back to the point"
+        ]}
+    ];
+
+    // ======================= CORE DATA =======================
+    const coreData = [
+        // ===== INTENTIONS (نیت‌ها) =====
+        { category: "Intentions", pattern: "I wanna...", formula: "I wanna + VERB", examples: ["I wanna go home.", "I wanna eat something.", "I wanna sleep.", "I wanna talk to you.", "I wanna be alone."] },
+        { category: "Intentions", pattern: "I gotta...", formula: "I gotta + VERB", examples: ["I gotta go now.", "I gotta finish this.", "I gotta call my mom.", "I gotta get some rest.", "I gotta do something."] },
+        { category: "Intentions", pattern: "I'm gonna...", formula: "I'm gonna + VERB", examples: ["I'm gonna try it.", "I'm gonna get some coffee.", "I'm gonna go out later.", "I'm gonna buy a new phone.", "I'm gonna call you back."] },
+        { category: "Intentions", pattern: "I need to...", formula: "I need to + VERB", examples: ["I need to sleep.", "I need to get some air.", "I need to talk to you.", "I need to find a job.", "I need to be alone."] },
+        { category: "Intentions", pattern: "I don't wanna...", formula: "I don't wanna + VERB", examples: ["I don't wanna go.", "I don't wanna talk about it.", "I don't wanna be here.", "I don't wanna do that.", "I don't wanna wake up."] },
+
+        // ===== FEELINGS (احساسات) =====
+        { category: "Feelings", pattern: "I feel like...", formula: "I feel like + NOUN / VERB-ing", examples: ["I feel like sleeping.", "I feel like going out.", "I feel like something's wrong.", "I feel like I'm getting tired.", "I feel like nobody cares."] },
+        { category: "Feelings", pattern: "I'm trying to...", formula: "I'm trying to + VERB", examples: ["I'm trying to study.", "I'm trying to get better.", "I'm trying to be positive.", "I'm trying to understand.", "I'm trying to find a way."] },
+        { category: "Feelings", pattern: "I just...", formula: "I just + VERB", examples: ["I just wanna sleep.", "I just don't get it.", "I just need some time.", "I just got here.", "I just wanted to say hi."] },
+        { category: "Feelings", pattern: "I was gonna...", formula: "I was gonna + VERB", examples: ["I was gonna call you.", "I was gonna go out.", "I was gonna ask you.", "I was gonna say that.", "I was gonna come over."] },
+        { category: "Feelings", pattern: "I wish...", formula: "I wish + CLAUSE", examples: ["I wish I could help.", "I wish I knew.", "I wish I was there.", "I wish I had more time.", "I wish you were here."] },
+
+        // ===== UNCERTAINTY (شک و تردید) =====
+        { category: "Uncertainty", pattern: "I don't know if...", formula: "I don't know if + CLAUSE", examples: ["I don't know if it's true.", "I don't know if I can do it.", "I don't know if he's coming.", "I don't know if it works.", "I don't know if I should go."] },
+        { category: "Uncertainty", pattern: "I'm not sure if...", formula: "I'm not sure if + CLAUSE", examples: ["I'm not sure if it's right.", "I'm not sure if I'm ready.", "I'm not sure if he's coming.", "I'm not sure if it works.", "I'm not sure if I should go."] },
+        { category: "Uncertainty", pattern: "It looks like...", formula: "It looks like + NOUN / CLAUSE", examples: ["It looks like rain.", "It looks like it's broken.", "It looks like we're lost.", "It looks like you're right.", "It looks like a good idea."] },
+        { category: "Uncertainty", pattern: "I think...", formula: "I think + CLAUSE", examples: ["I think it's a good idea.", "I think we should go.", "I think you're right.", "I think I'm gonna sleep.", "I think I need some rest."] },
+
+        // ===== REQUESTS (درخواست) =====
+        { category: "Requests", pattern: "Let me...", formula: "Let me + VERB", examples: ["Let me think.", "Let me see.", "Let me tell you.", "Let me help you.", "Let me do it."] },
+        { category: "Requests", pattern: "Give me...", formula: "Give me + NOUN", examples: ["Give me a sec.", "Give me a chance.", "Give me your phone.", "Give me five minutes.", "Give me some space."] },
+        { category: "Requests", pattern: "Can I...", formula: "Can I + VERB", examples: ["Can I help you?", "Can I sit here?", "Can I ask you something?", "Can I get a coffee?", "Can I call you later?"] },
+        { category: "Requests", pattern: "Could you...", formula: "Could you + VERB", examples: ["Could you help me?", "Could you repeat that?", "Could you wait a sec?", "Could you open the door?", "Could you turn it down?"] },
+
+        // ===== OPINIONS (نظر) =====
+        { category: "Opinions", pattern: "I mean...", formula: "I mean + CLAUSE", examples: ["I mean, it's okay.", "I mean, what's the point?", "I mean, we could try.", "I mean, that's not fair.", "I mean, is that true?"] },
+        { category: "Opinions", pattern: "I guess...", formula: "I guess + CLAUSE", examples: ["I guess you're right.", "I guess we'll see.", "I guess it's okay.", "I guess I should go.", "I guess that's it."] },
+        { category: "Opinions", pattern: "I suppose...", formula: "I suppose + CLAUSE", examples: ["I suppose you're right.", "I suppose it's fine.", "I suppose we could try.", "I suppose that's true.", "I suppose I should go."] },
+
+        // ===== OBLIGATION (تعهد) =====
+        { category: "Obligation", pattern: "I should...", formula: "I should + VERB", examples: ["I should go now.", "I should sleep more.", "I should call him.", "I should eat something.", "I should get some rest."] },
+        { category: "Obligation", pattern: "I have to...", formula: "I have to + VERB", examples: ["I have to go.", "I have to finish this.", "I have to talk to you.", "I have to find a job.", "I have to be there."] },
+        { category: "Obligation", pattern: "I must...", formula: "I must + VERB", examples: ["I must go now.", "I must finish this.", "I must call her.", "I must be there.", "I must get some rest."] },
+
+        // ===== HOPE (امید) =====
+        { category: "Hope", pattern: "I hope...", formula: "I hope + CLAUSE", examples: ["I hope you're okay.", "I hope we can meet.", "I hope it works out.", "I hope I'm not late.", "I hope you like it."] },
+        { category: "Hope", pattern: "I want...", formula: "I want + NOUN / to VERB", examples: ["I want to go home.", "I want to be alone.", "I want to sleep.", "I want to talk to you.", "I want to try it."] },
+
+        // ===== CONDITIONS (شرط) =====
+        { category: "Conditions", pattern: "If I...", formula: "If I + VERB, ...", examples: ["If I were you, I'd go.", "If I can help, I will.", "If I see him, I'll tell you.", "If I get a chance, I'll try.", "If I'm not busy, I'll come."] },
+        { category: "Conditions", pattern: "When I...", formula: "When I + VERB, ...", examples: ["When I get there, I'll call.", "When I see him, I'll ask.", "When I finish this, I'll go.", "When I have time, I'll try.", "When I'm ready, I'll start."] },
+        { category: "Conditions", pattern: "As soon as...", formula: "As soon as + CLAUSE", examples: ["As soon as I get there.", "As soon as I finish.", "As soon as I can.", "As soon as I have time.", "As soon as I know."] },
+
+        // ===== QUESTIONS (سوال) =====
+        { category: "Questions", pattern: "What if...", formula: "What if + CLAUSE", examples: ["What if it's not true?", "What if he doesn't come?", "What if I'm wrong?", "What if we try something else?", "What if I say no?"] },
+        { category: "Questions", pattern: "How about...", formula: "How about + NOUN / VERB-ing", examples: ["How about we go out?", "How about a coffee?", "How about we try it?", "How about we meet later?", "How about you?"] },
+        { category: "Questions", pattern: "Why don't you...", formula: "Why don't you + VERB", examples: ["Why don't you try it?", "Why don't you call him?", "Why don't we go out?", "Why don't you ask her?", "Why don't we meet later?"] },
+        { category: "Questions", pattern: "Do you wanna...", formula: "Do you wanna + VERB", examples: ["Do you wanna go out?", "Do you wanna try it?", "Do you wanna talk?", "Do you wanna come?", "Do you wanna eat something?"] }
+    ];
+
+    const translations = {
+        "Well...": "خب...", "You know": "می‌دونی", "Like": "مثل این که...",
+        "I mean": "منظورم اینه", "So": "خب پس", "Actually": "در واقع",
+        "Basically": "اساساً", "Right": "درسته؟", "Okay": "باشه",
+        "Umm": "اممم", "You see": "می‌بینی", "Let's see": "بذار ببینم",
+        "You know what I mean": "می‌دونی منظورم چیه؟", "Believe me": "باور کن",
+        "Anyway": "به هر حال", "By the way": "راستی", "In fact": "در واقع",
+        "Or something": "یا همچین چیزی", "And stuff": "و این چیزا",
+        "That kind of thing": "از این جور چیزا", "The thing is": "قضیه اینه",
+        "No way!": "نه بابا!", "Really?": "واقعاً؟", "Damn!": "عجب!",
+        "Oh wow!": "وای!", "You're kidding!": "داری شوخی می‌کنی!",
+        "Seriously?": "جدی؟", "For real?": "واقعاً؟", "Get out of here!": "نه بابا! شوخی می‌کنی!",
+        "That's insane!": "این دیوانگیه!", "Are you serious?": "جدی می‌گی؟",
+        "No kidding": "نه شوخی", "That's wild": "این دیوونگیه",
+        "Oh my God!": "وای خدای من!", "Unbelievable!": "باورنکردنی!",
+        "Kinda": "یه جورایی", "Maybe": "شاید", "I guess": "فکر کنم",
+        "Probably": "احتمالاً", "Sort of": "نوعی", "I think": "فکر می‌کنم",
+        "I suppose": "حدس می‌زنم", "It seems": "به نظر می‌رسه", "Apparently": "ظاهراً",
+        "I'm not sure": "مطمئن نیستم", "It could be": "ممکنه", "Perhaps": "شاید",
+        "Not necessarily": "الزاماً نه", "In a way": "از یک نظر",
+        "If you ask me": "اگه نظر من رو بخوای", "I'd say": "من می‌گم", "I assume": "فرض می‌کنم",
+        "What do you mean?": "منظورت چیه؟", "How come?": "چطور شد؟",
+        "What's up?": "چه خبر؟", "What are you getting at?": "به چی داری اشاره می‌کنی؟",
+        "What's the catch?": "گیرش کجاست؟", "Since when?": "از کی تا حالا؟",
+        "What's that supposed to mean?": "یعنی چه؟", "You think so?": "تو اینطور فکر می‌کنی؟",
+        "Why's that?": "چرا اینطور؟", "How so?": "چطور؟", "Like what?": "مثلاً چی؟",
+        "Says who?": "کی گفته؟", "Who knows?": "کی می‌دونه؟", "Where were we?": "کجا بودیم؟",
+        "What were you saying?": "چی می‌گفتی؟", "So, let's start": "خب، بیا شروع کنیم",
+        "First of all": "اول از همه", "To begin with": "برای شروع", "Alright, so": "بسیار خب، پس",
+        "Let's get started": "بیا شروع کنیم", "I'll tell you what": "بذار بهت بگم",
+        "You know what?": "می‌دونی چیه؟", "Here's the thing": "قضیه اینه",
+        "Let me tell you": "بذار بهت بگم", "What I'm trying to say is": "چیزی که می‌خوام بگم اینه",
+        "Anyway...": "به هر حال...", "I gotta go": "باید برم", "Catch you later": "بعداً می‌بینمت",
+        "Take care": "مواظب خودت باش", "It was nice talking": "خوب بود باهات حرف زدم",
+        "Let's catch up soon": "یه وقت زود با هم حرف بزنیم", "Talk later": "بعداً حرف می‌زنیم",
+        "Take it easy": "آروم باش", "I'm off": "رفتم", "I'd better let you go": "بهتره بذارم بری",
+        "Let's leave it there": "بذار همینجا تمومش کنیم", "Until next time": "تا دفعه بعد",
+        "I'll be in touch": "در ارتباط می‌شم", "Enjoy the rest of your day": "بقیه روزت خوب باشه",
+        "But": "اما", "However": "با این حال", "Moreover": "علاوه بر این",
+        "Furthermore": "به علاوه", "On the other hand": "از طرف دیگر", "In addition": "اضافه بر این",
+        "As a result": "در نتیجه", "Because": "چون", "Since": "از آنجا که",
+        "Therefore": "بنابراین", "Meanwhile": "در همین حال", "I'm devastated": "نابود شدم",
+        "I'm over the moon": "از خوشحالی پر می‌زنم", "I'm crushed": "له شدم",
+        "I'm thrilled": "واقعاً ذوق دارم", "I'm so embarrassed": "خیلی خجالت می‌کشم",
+        "I'm speechless": "حرف ندارم", "I'm so relieved": "واقعاً آسوده شدم",
+        "Thank God": "خدا رو شکر", "What a shame": "چه حیف", "I'm sick of this": "از این خسته شدم",
+        "I'm done": "تموم کردم", "I've had it": "دیگه طاقت ندارم", "That hit me hard": "این خیلی بهم ریخت",
+        "Sure": "حتماً", "No problem": "مشکلی نیست", "Got it": "متوجه شدم",
+        "My bad": "تقصیر من بود", "No worries": "نگران نباش", "I see": "می‌فهمم",
+        "I got you": "متوجه‌ات شدم", "Fair enough": "منصفانه است", "That works": "این کار می‌کنه",
+        "Sounds good": "خوبه", "Deal": "قبول", "I'm in": "من هستم",
+        "Count me in": "من رو هم حساب کن", "Sorry?": "ببخشید؟",
+        "Could you repeat that?": "می‌شه دوباره بگی؟", "I don't follow": "متوجه نشدم",
+        "What are you saying?": "چی می‌گی؟", "Can you explain?": "می‌شه توضیح بدی؟",
+        "What does that mean?": "این یعنی چی؟", "I'm lost": "گم شدم",
+        "Come again?": "دوباره بگو؟", "Are you saying that...?": "داری می‌گی که...؟",
+        "Exactly!": "دقیقاً!", "I disagree": "مخالفم", "Totally": "کاملاً",
+        "Absolutely": "قطعاً", "Not at all": "اصلاً", "I'm with you": "با توام",
+        "I don't think so": "فکر نمی‌کنم", "That's not true": "این درست نیست",
+        "You've got a point": "حرفت درسته", "I see what you mean": "منظورت رو می‌فهمم"
+    };
+
+    let currentMode = 'chunks';
+    let currentStep = 0;
+    const recorders = new Map();
+
+    const STORAGE_KEY = 'chunk_lite_done';
+    const CORE_STORAGE_KEY = 'chunk_lite_core_done';
+
+    function getDoneList(key) {
+        try {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : {};
+        } catch { return {}; }
+    }
+
+    function saveDoneList(key, list) {
+        localStorage.setItem(key, JSON.stringify(list));
+    }
+
+    function isDone(key, id) {
+        const list = getDoneList(key);
+        return list[id] === true;
+    }
+
+    function toggleDone(key, id) {
+        const list = getDoneList(key);
+        list[id] = !list[id];
+        saveDoneList(key, list);
+        return list[id];
+    }
+
+    function getCardId(stepIdx, phraseIdx) {
+        return 'c-' + stepIdx + '-' + phraseIdx;
+    }
+
+    function getCoreId(idx) {
+        return 'core-' + idx;
+    }
+
+    // ===== SVG ICONS =====
+    const ICONS = {
+        play: '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+        stop: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg>',
+        mic: '<svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>',
+        recorded: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>',
+        playing: '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>',
+        speaker: '<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
+        check: '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+        checkCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 10" fill="none"/></svg>',
+        expand: '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>'
+    };
+
+    // ===== RENDER MAIN TABS =====
+    function renderMainTabs() {
+        const container = document.getElementById('mainTabs');
+        container.innerHTML = `
+            <button class="main-tab ' + (currentMode === 'chunks' ? 'active' : '') + '" data-mode="chunks">Chunks</button>
+            <button class="main-tab core-tab ' + (currentMode === 'core' ? 'active' : '') + '" data-mode="core">Core</button>
+        `;
+        container.querySelectorAll('.main-tab').forEach(function(btn) {
+            btn.onclick = function() {
+                currentMode = btn.dataset.mode;
+                if (currentMode === 'core') {
+                    document.getElementById('coreDesc').style.display = 'block';
+                    renderMainTabs();
+                    renderCore();
+                } else {
+                    document.getElementById('coreDesc').style.display = 'block';
+                    renderMainTabs();
+                    renderChunks();
+                }
+            };
+        });
+    }
+
+    // ===== RENDER CHUNKS =====
+    function renderChunks() {
+        const step = stepsData[currentStep];
+        const container = document.getElementById('phrasesContainer');
+
+        var subTabsHtml = '';
+        for (var i = 0; i < stepsData.length; i++) {
+            var s = stepsData[i];
+            subTabsHtml += '<button class="sub-tab ' + (i === currentStep ? 'active' : '') + '" data-i="' + i + '">' + s.name + '</button>';
+        }
+
+        var cardsHtml = '';
+        for (var j = 0; j < step.phrases.length; j++) {
+            var eng = step.phrases[j];
+            var fa = translations[eng] || eng;
+            var cardId = getCardId(currentStep, j);
+            var done = isDone(STORAGE_KEY, cardId);
+            var doneClass = done ? 'done' : '';
+            var doneIcon = done ? ICONS.checkCircle : ICONS.check;
+            var doneBtnClass = done ? 'icon-btn done-btn is-done' : 'icon-btn done-btn';
+            cardsHtml += `
+                <div class="phrase-item ${doneClass}" id="${cardId}">
+                    <span class="phrase-num">${j + 1}</span>
+                    <span class="phrase-eng">${eng}</span>
+                    <span class="phrase-fa">${fa}</span>
+                    <div class="phrase-actions">
+                        <button class="icon-btn tts-btn" data-word="${eng.replace(/"/g, '&quot;')}">${ICONS.speaker}</button>
+                        <button class="icon-btn rec-btn" data-card="${cardId}">${ICONS.mic}</button>
+                        <button class="${doneBtnClass}" data-key="${STORAGE_KEY}" data-id="${cardId}">${doneIcon}</button>
+                    </div>
+                    <audio class="phrase-audio" id="audio-${cardId}"></audio>
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div style="margin-bottom:8px;"><span class="benefit">${step.benefit}</span></div>
+            <div class="sub-tabs-wrap">${subTabsHtml}</div>
+            <div class="phrase-grid">${cardsHtml}</div>
+        `;
+
+        // ===== SUB TABS =====
+        container.querySelectorAll('.sub-tab').forEach(function(btn) {
+            btn.onclick = function() {
+                currentStep = +btn.dataset.i;
+                renderChunks();
+            };
+        });
+
+        // ===== TTS =====
+        container.querySelectorAll('.tts-btn').forEach(function(btn) {
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                var word = btn.dataset.word;
+                var utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                btn.classList.add('speaking');
+                utterance.onend = function() { btn.classList.remove('speaking'); };
+                utterance.onerror = function() { btn.classList.remove('speaking'); };
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            };
+        });
+
+        // ===== DONE =====
+        container.querySelectorAll('.done-btn').forEach(function(btn) {
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                var key = btn.dataset.key;
+                var id = btn.dataset.id;
+                var newState = toggleDone(key, id);
+                var card = document.getElementById(id);
+                if (newState) {
+                    card.classList.add('done');
+                    btn.innerHTML = ICONS.checkCircle;
+                    btn.classList.add('is-done');
+                } else {
+                    card.classList.remove('done');
+                    btn.innerHTML = ICONS.check;
+                    btn.classList.remove('is-done');
+                }
+            };
+        });
+
+        // ===== RECORD =====
+        container.querySelectorAll('.rec-btn').forEach(function(btn) {
+            var cardId = btn.dataset.card;
+            var card = document.getElementById(cardId);
+            var audioEl = document.getElementById('audio-' + cardId);
+
+            if (!recorders.has(cardId)) {
+                recorders.set(cardId, {
+                    mediaRecorder: null,
+                    audioChunks: [],
+                    stream: null,
+                    state: 'idle'
+                });
+            }
+            var rec = recorders.get(cardId);
+
+            btn.onclick = async function(e) {
+                e.stopPropagation();
+
+                if (rec.state === 'recording') {
+                    if (rec.mediaRecorder && rec.mediaRecorder.state !== 'inactive') {
+                        rec.mediaRecorder.stop();
+                    }
+                    return;
+                }
+
+                if (rec.state === 'recorded') {
+                    if (audioEl.src) {
+                        rec.state = 'playing';
+                        btn.innerHTML = ICONS.playing;
+                        btn.className = 'icon-btn rec-btn playing';
+                        audioEl.play().catch(function() {});
+                        audioEl.onended = function() {
+                            rec.state = 'recorded';
+                            btn.innerHTML = ICONS.recorded;
+                            btn.className = 'icon-btn rec-btn recorded';
+                        };
+                    }
+                    return;
+                }
+
+                if (rec.state === 'idle' || rec.state === 'played') {
+                    document.body.classList.add('blur-chunks');
+                    card.classList.add('recording-active');
+                    rec.audioChunks = [];
+
+                    try {
+                        var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        rec.stream = stream;
+                        rec.mediaRecorder = new MediaRecorder(stream);
+                        rec.mediaRecorder.ondataavailable = function(e) {
+                            if (e.data.size > 0) rec.audioChunks.push(e.data);
+                        };
+                        rec.mediaRecorder.onstop = function() {
+                            var blob = new Blob(rec.audioChunks, { type: 'audio/webm' });
+                            var url = URL.createObjectURL(blob);
+                            rec.audioUrl = url;
+                            audioEl.src = url;
+                            rec.state = 'recorded';
+                            btn.innerHTML = ICONS.recorded;
+                            btn.className = 'icon-btn rec-btn recorded';
+                            card.classList.remove('recording-active');
+                            document.body.classList.remove('blur-chunks');
+                            if (rec.stream) rec.stream.getTracks().forEach(function(t) { t.stop(); });
+                        };
+                        rec.mediaRecorder.start();
+                        rec.state = 'recording';
+                        btn.innerHTML = ICONS.stop;
+                        btn.className = 'icon-btn rec-btn recording';
+                    } catch (err) {
+                        alert('دسترسی به میکروفون داده نشد');
+                        document.body.classList.remove('blur-chunks');
+                        card.classList.remove('recording-active');
+                        rec.state = 'idle';
+                        btn.innerHTML = ICONS.mic;
+                        btn.className = 'icon-btn rec-btn';
+                    }
+                }
+            };
+        });
+    }
+
+    // ===== RENDER CORE =====
+    function renderCore() {
+        var container = document.getElementById('phrasesContainer');
+
+        var cardsHtml = '';
+        for (var i = 0; i < coreData.length; i++) {
+            var item = coreData[i];
+            var id = getCoreId(i);
+            var done = isDone(CORE_STORAGE_KEY, id);
+            var doneClass = done ? 'done' : '';
+            var doneIcon = done ? ICONS.checkCircle : ICONS.check;
+            var doneBtnClass = done ? 'icon-btn done-btn is-done' : 'icon-btn done-btn';
+            var isOpen = i < 5;
+
+            var examplesHtml = '';
+            for (var k = 0; k < item.examples.length; k++) {
+                examplesHtml += '<div class="example"><span class="arrow">→</span> ' + item.examples[k] + '</div>';
+            }
+
+            cardsHtml += `
+                <div class="core-item ${doneClass}" id="${id}">
+                    <span class="core-num">${i + 1}</span>
+                    <span class="core-category">${item.category}</span>
+                    <span class="core-pattern">${item.pattern}</span>
+                    <span class="core-formula">${item.formula}</span>
+                    <div class="core-examples ${isOpen ? 'open' : ''}" id="examples-${id}">
+                        ${examplesHtml}
+                    </div>
+                    <div class="phrase-actions">
+                        <button class="icon-btn tts-btn" data-word="${item.pattern.replace(/"/g, '&quot;')}">${ICONS.speaker}</button>
+                        <button class="icon-btn rec-btn" data-card="${id}">${ICONS.mic}</button>
+                        <button class="${doneBtnClass}" data-key="${CORE_STORAGE_KEY}" data-id="${id}">${doneIcon}</button>
+                        <button class="icon-btn expand-btn ${isOpen ? 'open' : ''}" data-id="${id}">${ICONS.expand}</button>
+                    </div>
+                    <audio class="phrase-audio" id="audio-${id}"></audio>
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div style="margin-bottom:10px;"><span class="benefit">الگوهای مولد — هر الگو صدها جمله می‌سازد</span></div>
+            <div class="phrase-grid">${cardsHtml}</div>
+        `;
+
+        // ===== EXPAND =====
+        container.querySelectorAll('.expand-btn').forEach(function(btn) {
+            var id = btn.dataset.id;
+            var examples = document.getElementById('examples-' + id);
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                examples.classList.toggle('open');
+                btn.classList.toggle('open');
+            };
+        });
+
+        // ===== TTS =====
+        container.querySelectorAll('.tts-btn').forEach(function(btn) {
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                var word = btn.dataset.word;
+                var utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.8;
+                btn.classList.add('speaking');
+                utterance.onend = function() { btn.classList.remove('speaking'); };
+                utterance.onerror = function() { btn.classList.remove('speaking'); };
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            };
+        });
+
+        // ===== DONE =====
+        container.querySelectorAll('.done-btn').forEach(function(btn) {
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                var key = btn.dataset.key;
+                var id = btn.dataset.id;
+                var newState = toggleDone(key, id);
+                var card = document.getElementById(id);
+                if (newState) {
+                    card.classList.add('done');
+                    btn.innerHTML = ICONS.checkCircle;
+                    btn.classList.add('is-done');
+                } else {
+                    card.classList.remove('done');
+                    btn.innerHTML = ICONS.check;
+                    btn.classList.remove('is-done');
+                }
+            };
+        });
+
+        // ===== RECORD =====
+        container.querySelectorAll('.rec-btn').forEach(function(btn) {
+            var cardId = btn.dataset.card;
+            var card = document.getElementById(cardId);
+            var audioEl = document.getElementById('audio-' + cardId);
+
+            if (!recorders.has(cardId)) {
+                recorders.set(cardId, {
+                    mediaRecorder: null,
+                    audioChunks: [],
+                    stream: null,
+                    state: 'idle'
+                });
+            }
+            var rec = recorders.get(cardId);
+
+            btn.onclick = async function(e) {
+                e.stopPropagation();
+
+                if (rec.state === 'recording') {
+                    if (rec.mediaRecorder && rec.mediaRecorder.state !== 'inactive') {
+                        rec.mediaRecorder.stop();
+                    }
+                    return;
+                }
+
+                if (rec.state === 'recorded') {
+                    if (audioEl.src) {
+                        rec.state = 'playing';
+                        btn.innerHTML = ICONS.playing;
+                        btn.className = 'icon-btn rec-btn playing';
+                        audioEl.play().catch(function() {});
+                        audioEl.onended = function() {
+                            rec.state = 'recorded';
+                            btn.innerHTML = ICONS.recorded;
+                            btn.className = 'icon-btn rec-btn recorded';
+                        };
+                    }
+                    return;
+                }
+
+                if (rec.state === 'idle' || rec.state === 'played') {
+                    document.body.classList.add('blur-chunks');
+                    card.classList.add('recording-active');
+                    rec.audioChunks = [];
+
+                    try {
+                        var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        rec.stream = stream;
+                        rec.mediaRecorder = new MediaRecorder(stream);
+                        rec.mediaRecorder.ondataavailable = function(e) {
+                            if (e.data.size > 0) rec.audioChunks.push(e.data);
+                        };
+                        rec.mediaRecorder.onstop = function() {
+                            var blob = new Blob(rec.audioChunks, { type: 'audio/webm' });
+                            var url = URL.createObjectURL(blob);
+                            rec.audioUrl = url;
+                            audioEl.src = url;
+                            rec.state = 'recorded';
+                            btn.innerHTML = ICONS.recorded;
+                            btn.className = 'icon-btn rec-btn recorded';
+                            card.classList.remove('recording-active');
+                            document.body.classList.remove('blur-chunks');
+                            if (rec.stream) rec.stream.getTracks().forEach(function(t) { t.stop(); });
+                        };
+                        rec.mediaRecorder.start();
+                        rec.state = 'recording';
+                        btn.innerHTML = ICONS.stop;
+                        btn.className = 'icon-btn rec-btn recording';
+                    } catch (err) {
+                        alert('دسترسی به میکروفون داده نشد');
+                        document.body.classList.remove('blur-chunks');
+                        card.classList.remove('recording-active');
+                        rec.state = 'idle';
+                        btn.innerHTML = ICONS.mic;
+                        btn.className = 'icon-btn rec-btn';
+                    }
+                }
+            };
+        });
+    }
+
+    // ===== INIT =====
+    document.getElementById('coreDesc').style.display = 'block';
+    renderMainTabs();
+    renderChunks();
+</script>
+</body>
+</html>
