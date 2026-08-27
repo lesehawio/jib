@@ -1263,6 +1263,9 @@
             <hr class="divider" />
             <button class="nav-item" data-page="bookmarks"><i class="fas fa-bookmark"></i> <span class="nav-label">نشان‌ها</span></button>
             <button class="nav-item" data-page="stats"><i class="fas fa-chart-simple"></i> <span class="nav-label">آمار</span></button>
+            <!-- ===== دو دکمه جدید ===== -->
+            <button class="nav-item" data-page="folderA"><i class="fas fa-folder"></i> <span class="nav-label">پوشه A</span></button>
+            <button class="nav-item" data-page="clock"><i class="fas fa-clock"></i> <span class="nav-label">ساعت</span></button>
         </nav>
     </aside>
 
@@ -2281,6 +2284,19 @@
                             </div>
                         `;
                     resultCount.textContent = '<i class="fas fa-chart-simple"></i> ' + t('statistics');
+                    closeSidebarPanel();
+                    return;
+                }
+
+                // ===== دو دکمه جدید =====
+                if (page === 'folderA') {
+                    window.open('https://lesehawio.github.io/jib/A/', '_blank');
+                    closeSidebarPanel();
+                    return;
+                }
+
+                if (page === 'clock') {
+                    window.open('https://lesehawio.github.io/jib/000.html', '_blank');
                     closeSidebarPanel();
                     return;
                 }
